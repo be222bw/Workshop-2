@@ -2,23 +2,26 @@ package model;
 
 public class Member {
 	private String name;
-	private String id;
 	private int numOfBoats;
 	private String personalNumber;
 	
-	public Member(String n, String i, int b, String p) {
+	public Member(String n, String p, int b) {
 		name = n;
-		id = i;
 		numOfBoats = b;
+		
+		try {
+			if (!model.Verification.isCorrect(p)) {
+				throw new Exception("The personal number is not living up to our expectations!");
+			}
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		
 		personalNumber = p;
 	}
 	
 	public String getName() {
 		return name;
-	}
-	
-	public String getId() {
-		return id;
 	}
 	
 	public String getPersonalNum() {
