@@ -1,6 +1,4 @@
-package view;
-
-import java.util.Scanner;
+package view;;
 
 public class Console {
 
