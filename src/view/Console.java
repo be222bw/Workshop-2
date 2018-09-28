@@ -1,4 +1,6 @@
-package view;;
+package view;
+
+import java.util.Scanner;
 
 public class Console {
 
@@ -25,7 +27,7 @@ public class Console {
 	}
 	
 	public void showHelp(String args[]) {
-		System.out.println("To create member, use command-line argument /cm <name> <number of boats> " + 
+		System.out.println("To create member, use command-line argument /cm \"<name>\" <number of boats> " + 
 				"<personal number>.");
 	}
 	
@@ -46,11 +48,25 @@ public class Console {
 			System.err.println(e.getMessage() + " Exiting.");
 			System.exit(-1);
 		}
+
+		String desc;
+		Scanner keyBoardInput = new Scanner(System.in);
+		for (int i = 0; i < Integer.parseInt(args[3]); i++) {
+			System.out.print("Enter description for boat number " + (i + 1) + ": ");
+			desc = keyBoardInput.nextLine();
+			member.assignBoat(desc);
+		}
 		
+		keyBoardInput.close();
 		
 		System.out.println("Name: " + member.getName() +
 				"\nPersonal number: " + member.getPersonalNum() + "\nNumber of boats: " +
 				member.getNumOfBoats() + "\nId: " + member.getIdString());
+		
+		int numOfBoats = Integer.parseInt(args[3]);
+		for (int i = 0; i < numOfBoats; i++) {
+			System.out.println("Boat number " + (i + 1) + ":\n" + member.getBoat(i).getDesc());
+		}
 	}
 	
 
