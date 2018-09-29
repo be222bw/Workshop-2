@@ -25,6 +25,10 @@ public class Console {
 		case "-cm":
 			createMember(args);
 			break;
+		case "/lm":
+		case "--list-members":
+		case "-lm":
+			
 		default:
 			System.out.println("Could not identify argument \"" + args[0] + "\"");
 			break;
@@ -34,6 +38,7 @@ public class Console {
 	public void showHelp(String args[]) {
 		System.out.println("To create member, use command-line argument /cm \"<name>\" <number of boats> " + 
 				"<personal number>.");
+		System.out.println("To list members, use /lm /v.");
 	}
 	
 	public void createMember(String args[]) {

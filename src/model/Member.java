@@ -18,6 +18,14 @@ public class Member {
 		boatList = new ArrayList<Boat>();
 	}
 	
+	public Member(String name, String personalNumber, UUID id, int numOfBoats) {
+		this.name = name;
+		this.personalNumber = personalNumber;
+		this.id = id;
+		this.numOfBoats = numOfBoats;
+		boatList = new ArrayList<Boat>();
+	}
+	
 	public void assignBoat(String type, double length) {
 		boatList.add(new Boat(type, length));
 	}
