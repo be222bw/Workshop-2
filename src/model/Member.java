@@ -18,8 +18,8 @@ public class Member {
 		boatList = new ArrayList<Boat>();
 	}
 	
-	public void assignBoat(String desc) {
-		boatList.add(new Boat(desc));
+	public void assignBoat(String type, double length) {
+		boatList.add(new Boat(type, length));
 	}
 	
 	public String getName() {

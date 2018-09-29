@@ -4,6 +4,11 @@ import java.util.Scanner;
 
 public class Console {
 
+	private FileWrite fw;
+	
+	public Console(String fileName) {
+		fw = new FileWrite(fileName);
+	}
 	/**
 	 * Identifies the first argument, and calls the relative method.
 	 * @param args Array of arguments, whose first element is the argument to be identified.
@@ -49,14 +54,18 @@ public class Console {
 			System.exit(-1);
 		}
 
-		String desc;
+		String type;
+		double length;
 		Scanner keyBoardInput = new Scanner(System.in);
 		for (int i = 0; i < Integer.parseInt(args[3]); i++) {
-			System.out.print("Enter description for boat number " + (i + 1) + ": ");
-			desc = keyBoardInput.nextLine();
-			member.assignBoat(desc);
+			System.out.print("Enter type boat number " + (i + 1) + ": ");
+			type = keyBoardInput.nextLine();
+			System.out.print("Enter length of boat (in metres): ");
+			length = keyBoardInput.nextDouble();
+			member.assignBoat(type, length);
 		}
 		
+		fw.writeMemberData(member);
 		keyBoardInput.close();
 		
 		System.out.println("Name: " + member.getName() +
@@ -65,7 +74,8 @@ public class Console {
 		
 		int numOfBoats = Integer.parseInt(args[3]);
 		for (int i = 0; i < numOfBoats; i++) {
-			System.out.println("Boat number " + (i + 1) + ":\n" + member.getBoat(i).getDesc());
+			System.out.println("Boat number " + (i + 1) + ":\n" + member.getBoat(i).getType() + " " +
+		member.getBoat(i).getLength() + " metres.");
 		}
 	}
 	
