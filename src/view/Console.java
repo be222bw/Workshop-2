@@ -1,7 +1,6 @@
 package view;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 import model.Member;
 
 public class Console {
@@ -48,12 +47,18 @@ public class Console {
 	
 	public void listMembers(String[] args) {
 		ArrayList<Member> memberList = fr.readMembers();
-		if (args[1].equals("/v")) {
 			for (int i = 0; i < memberList.size(); i++) {
 				Member member = memberList.get(i);
-				System.out.println(member.getName() + " " + member.getIdString() + " " + member.getNumOfBoats());
+				System.out.println("Name: " + member.getName() + " " +
+				(args[1].equals("/v") ? "Personal number: " + member.getPersonalNum() + " " : "") + 
+				"Id: " + member.getIdString() + " Number of boats: " + member.getNumOfBoats());
+				if (args[1].equals("/v")) {
+					for (int n= 0; n < member.getNumOfBoats(); n++) {
+						model.Boat boat = member.getBoat(n);
+						System.out.println("Boat type: " + boat.getType() + " Length: " + boat.getLength() + " metres.");
+					}
+				}
 			}
-		}
 	}
 	
 	public void createMember(String args[]) {

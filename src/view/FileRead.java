@@ -20,13 +20,15 @@ public class FileRead {
 	}
 	
 	public ArrayList<model.Member> readMembers() {
-		while (fileScan.hasNextLine()) {
+		while (fileScan.hasNext()) {
 			String id = fileScan.next();
 			
 			fileScan.useDelimiter("\"");
+			fileScan.next();
 			String name = fileScan.next();
 			
 			fileScan.reset();
+			fileScan.next();
 			
 			int numOfBoats = fileScan.nextInt();
 			String personalNumber = fileScan.next();
@@ -39,9 +41,12 @@ public class FileRead {
 			double length;
 			for (int i = 0; i < numOfBoats; i++) {
 				fileScan.useDelimiter("\"");
+				String we = fileScan.next();
 				type = fileScan.next();
 				fileScan.reset();
-				length = fileScan.nextDouble();
+				we = fileScan.next();
+				we = fileScan.next();
+				length = Double.parseDouble(we);
 				member.assignBoat(type, length);
 			}
 			memberList.add(member);
