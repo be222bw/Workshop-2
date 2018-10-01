@@ -7,7 +7,6 @@ import model.Member;
 import model.Verification;
 
 public class Console {
-
 	private FileWrite fw;
 	private FileRead fr;
 	private ArrayList<Member> memberList;
@@ -26,8 +25,8 @@ public class Console {
 	 */
 	public void identifyArgument(String[] args) {
 		switch (args[0]) {
-		case "/?":
-			showHelp(null);
+		case "/h":
+			showHelp(args[0]);
 			break;
 		case "/cm":
 			createMember(args);
@@ -88,7 +87,7 @@ public class Console {
 	 * @param args The arguments.
 	 */
 	public void changeMemberInfo(String[] args) {
-		if (args.length > 1 && args[1].equals("/?")) {
+		if (args.length > 1 && args[1].equals("/h")) {
 			showHelp(args[0]);
 			return;
 		}
@@ -140,7 +139,7 @@ public class Console {
 		case "/rnb":
 			System.out.println("Register new boat. Syntax is /rnb <id> \"<boat type>\" <boat length>.");
 			break;
-		default:
+		case "/h":
 			System.out.println("/cm Create member.");
 			System.out.println("/lm List members.");
 			System.out.println("/vm View specific member.");
@@ -148,6 +147,9 @@ public class Console {
 			System.out.println("/cmi Change member info.");
 			System.out.println("/cbi Change boat info.");
 			System.out.println("/rnb Register new boat.");
+			break;
+		default:
+			System.out.println("Parameter not recognised!");
 		}
 	}
 	
@@ -156,7 +158,7 @@ public class Console {
 	 * @param args The arguments.
 	 */
 	public void listMembers(String[] args) {
-		if (args.length > 1 && args[1].equals("/?")) {
+		if (args.length > 1 && args[1].equals("/h")) {
 			showHelp(args[0]);
 			return;
 		}
@@ -172,7 +174,7 @@ public class Console {
 	 * @param args The arguments.
 	 */
 	public void registerNewBoat(String[] args) {
-		if (args.length > 1 && args[1].equals("/?")) {
+		if (args.length > 1 && args[1].equals("/h")) {
 			showHelp(args[0]);
 			return;
 		}
@@ -188,7 +190,7 @@ public class Console {
 	 * @param args The arguments.
 	 */
 	public void createMember(String args[]) {
-		if (args.length > 1 && args[1].equals("/?")) {
+		if (args.length > 1 && args[1].equals("/h")) {
 			showHelp(args[0]);
 			return;
 		}
@@ -231,7 +233,7 @@ public class Console {
 	 * @param args The arguments.
 	 */
 public void viewMember(String[] args) {
-	if (args.length > 1 && args[1].equals("/?")) {
+	if (args.length > 1 && args[1].equals("/h")) {
 		showHelp(args[0]);
 		return;
 	}
@@ -247,7 +249,7 @@ public void viewMember(String[] args) {
  * @param args The arguments.
  */
 	public void deleteMember(String[] args) {
-		if (args.length > 1 && args[1].equals("/?")) {
+		if (args.length > 1 && args[1].equals("/h")) {
 			showHelp(args[0]);
 			return;
 		}
