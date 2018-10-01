@@ -7,10 +7,12 @@ public class Console {
 
 	private FileWrite fw;
 	private FileRead fr;
+	private ArrayList<Member> memberList;
 	
 	public Console(String fileName) {
 		fw = new FileWrite(fileName);
 		fr = new  FileRead(fileName);
+		memberList = fr.readMembers();
 	}
 	/**
 	 * Identifies the first argument, and calls the relative method.
@@ -18,20 +20,20 @@ public class Console {
 	 */
 	public void identifyArgument(String[] args) {
 		switch (args[0]) {
-		case "--help":
 		case "/?":
-		case "-h":
 			showHelp(args);
 			break;
 		case "/cm":
-		case "--create-member":
-		case "-cm":
 			createMember(args);
 			break;
 		case "/lm":
-		case "--list-members":
-		case "-lm":
 			listMembers(args);
+			break;
+		case "/vm":
+			viewMember(args);
+			break;
+		case "/dm":
+			deleteMember(args);
 			break;
 		default:
 			System.out.println("Could not identify argument \"" + args[0] + "\"");
@@ -46,7 +48,6 @@ public class Console {
 	}
 	
 	public void listMembers(String[] args) {
-		ArrayList<Member> memberList = fr.readMembers();
 			for (int i = 0; i < memberList.size(); i++) {
 				Member member = memberList.get(i);
 				System.out.println("Name: " + member.getName() + " " +
@@ -109,5 +110,38 @@ public class Console {
 		}
 	}
 	
-
+public void viewMember(String[] args) {
+	try {
+		if (args.length < 2) {
+			throw new Exception("Not enough parameters!");
+		}
+	} catch (Exception e) {
+		System.err.println(e.getMessage());
+		System.exit(-3);
+	}
+}
+	
+	public void deleteMember(String[] args) {
+		try {
+			if (args.length < 2) {
+				throw new Exception("Not enough parameters!");
+			}
+		} catch (Exception e) {
+			System.err.println(e.getLocalizedMessage());
+			System.exit(-3);
+		}
+		
+		String idString = args[1];
+		
+		int size = memberList.size();
+		for (int i = 0; i < size; i++) {
+			Member member = memberList.get(i);
+			if (member.getIdString().equals(idString)) {
+				memberList.remove(i);
+				break;
+			}
+		}
+		
+		fw.overwriteMemberFile(memberList);
+	}
 }
