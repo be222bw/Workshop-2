@@ -18,7 +18,7 @@ public class FileWrite {
 		registry = new File(fileName);
 	}
 	
-	public void writeMemberData(model.Member member) {
+	public void writeMemberData(Member member) {
 		try {
 			pw = new PrintWriter(new FileOutputStream(registry, true));
 		} catch (FileNotFoundException e) {
