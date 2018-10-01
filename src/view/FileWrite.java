@@ -14,15 +14,23 @@ public class FileWrite {
 	private PrintWriter pw;
 	private PrintWriter fileOverwriter;
 
+	/**
+	 * Construct a FileWrite object.
+	 * @param fileName The file name of the registry.
+	 */
 	FileWrite(String fileName) {
 		registry = new File(fileName);
 	}
 	
+	/**
+	 * Write the member data of one member.
+	 * @param member The member whose data is to be written.
+	 */
 	public void writeMemberData(Member member) {
 		try {
 			pw = new PrintWriter(new FileOutputStream(registry, true));
 		} catch (FileNotFoundException e) {
-			System.err.println(e.getLocalizedMessage());
+			System.err.println(e.getMessage());
 			System.exit(-2);
 		}
 		int numOfBoats = member.getNumOfBoats();
@@ -38,6 +46,10 @@ public class FileWrite {
 		pw.close();
 	}
 	
+	/**
+	 * Overwrites the entire file with a list of members.
+	 * @param members The members.
+	 */
 	public void overwriteMemberFile(ArrayList<Member> members) {
 		try {
 			fileOverwriter = new PrintWriter(registry);

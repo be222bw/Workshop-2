@@ -13,6 +13,10 @@ public class FileRead {
 	private Scanner fileScan;
 	private ArrayList<Member> memberList;
 	
+	/**
+	 * Construct a FIleRead object.
+	 * @param fileName The file name of the registry.
+	 */
 	public FileRead(String fileName) {
 		memberList = new ArrayList<Member>();
 		try {
@@ -22,6 +26,10 @@ public class FileRead {
 		}
 	}
 	
+	/**
+	 * Read the members from file.
+	 * @return ArrayList of the members.
+	 */
 	public ArrayList<Member> readMembers() {
 		while (fileScan.hasNext()) {
 			String id = fileScan.next();

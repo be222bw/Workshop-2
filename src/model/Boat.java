@@ -5,7 +5,7 @@ public class Boat {
 	private double length;
 	
 	/**
-	 * Constructs a Boat object.
+	 * Construct a Boat object.
 	 * @param type The boat type.
 	 * @param length The length of the boat.
 	 */
@@ -15,7 +15,7 @@ public class Boat {
 	}
 	
 	/**
-	 * Gets the type of boat.
+	 * Get the type of boat.
 	 * @return The type.
 	 */
 	public String getType() {
@@ -23,7 +23,7 @@ public class Boat {
 	}
 	
 	/**
-	 * Gets the length of the boat.
+	 * Get the length of the boat.
 	 * @return The length.
 	 */
 	public double getLength() {
@@ -31,7 +31,7 @@ public class Boat {
 	}
 	
 	/**
-	 * Sets (or changes) the boat type.
+	 * Set (or change) the boat type.
 	 * @param type The type.
 	 */
 	public void setType(String type) { // This was in the requirements. I guess they rebuild the boat. 
@@ -39,7 +39,7 @@ public class Boat {
 	}
 	
 	/**
-	 * Sets (or changes) the length of the boat.
+	 * Set (or change) the length of the boat.
 	 * @param length The length.
 	 */
 	public void setLength(double length) { // Same comment as above.

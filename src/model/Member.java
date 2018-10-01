@@ -58,11 +58,19 @@ public class Member {
 		numOfBoats++;
 	}
 	
+	/**
+	 * Deletes the boat specified by the index.
+	 * @param i The index.
+	 */
 	public void deleteBoat(int i) {
 		boatList.remove(i);
 		numOfBoats--;
 	}
 	
+	/**
+	 * Gets the name of the member.
+	 * @return The name of the member.
+	 */
 	public String getName() {
 		return name;
 	}
@@ -75,14 +83,27 @@ public class Member {
 		this.name = name;
 	}
 	
-	public Boat getBoat(int n) {
-		return boatList.get(n);
+	/**
+	 * Get the boat specified by the index.
+	 * @param i The index.
+	 * @return The boat.
+	 */
+	public Boat getBoat(int i) {
+		return boatList.get(i);
 	}
 	
+	/**
+	 * Get the member's personal number.
+	 * @return The personal number.
+	 */
 	public String getPersonalNum() {
 		return personalNumber;
 	}
 	
+	/**
+	 * Set the personal number.
+	 * @param personalNumber The new personal number.
+	 */
 	public void setPersonalNum(String personalNumber) {
 		try {
 			if (!Verification.isCorrect(personalNumber)) {
@@ -96,10 +117,18 @@ public class Member {
 		this.personalNumber = personalNumber;
 	}
 	
+	/**
+	 * Get the id in string form.
+	 * @return The id in string form.
+	 */
 	public String getIdString() {
 		return id.toString();
 	}
 	
+	/**
+	 * Get the number of boats.
+	 * @return The number of boats.
+	 */
 	public int getNumOfBoats() {
 		return numOfBoats;
 	}

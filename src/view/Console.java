@@ -57,21 +57,6 @@ public class Console {
 	}
 	
 	
-	/**
-	 * Iterates the member list, to find the right member. If he is not found, returns null.
-	 * @param idString The id string of the member to be returned.
-	 * @return The member with the given id, or, if he is not found, null.
-	 */
-	public Member getMemberById(String idString) {
-		int size = memberList.size();
-		for (int i = 0; i < size; i++) {
-			Member member = memberList.get(i);
-			if (idString.equals(member.getIdString())) {
-				return member;
-			}
-		}
-		return null;
-	}
 	
 	/**
 	 * Changes either the type or length of a boat.
@@ -100,7 +85,7 @@ public class Console {
 	/**
 	 * Changes either the name or the personal number of a member. Id cannot be changed, but the number of boats
 	 * is changed if one adds a boat or removes a boat, i.e. not here.
-	 * @param args The arguments used.
+	 * @param args The arguments.
 	 */
 	public void changeMemberInfo(String[] args) {
 		if (args.length > 1 && args[1].equals("/?")) {
@@ -128,7 +113,7 @@ public class Console {
 	
 	/**
 	 * Lists of commands available in the programme, or shows how to use a comand.
-	 * @param args
+	 * @param args The arguments.
 	 */
 	public void showHelp(String command) {
 		switch (command) {
@@ -166,6 +151,10 @@ public class Console {
 		}
 	}
 	
+	/**
+	 * Lists members.
+	 * @param args The arguments.
+	 */
 	public void listMembers(String[] args) {
 		if (args.length > 1 && args[1].equals("/?")) {
 			showHelp(args[0]);
@@ -178,6 +167,10 @@ public class Console {
 		}
 	}
 	
+	/**
+	 * Registers a new boat.
+	 * @param args The arguments.
+	 */
 	public void registerNewBoat(String[] args) {
 		if (args.length > 1 && args[1].equals("/?")) {
 			showHelp(args[0]);
@@ -190,7 +183,10 @@ public class Console {
 		member.assignBoat(boat);
 	}
 	
-	
+	/**
+	 * Creates a member.
+	 * @param args The arguments.
+	 */
 	public void createMember(String args[]) {
 		if (args.length > 1 && args[1].equals("/?")) {
 			showHelp(args[0]);
@@ -231,6 +227,9 @@ public class Console {
 		}
 	}
 	
+	/** Views a specific member.
+	 * @param args The arguments.
+	 */
 public void viewMember(String[] args) {
 	if (args.length > 1 && args[1].equals("/?")) {
 		showHelp(args[0]);
@@ -244,6 +243,9 @@ public void viewMember(String[] args) {
 	printMember(member, args.length > 2 && args[2].equals("/v"));
 }
 	
+/** Deletes a specific member.
+ * @param args The arguments.
+ */
 	public void deleteMember(String[] args) {
 		if (args.length > 1 && args[1].equals("/?")) {
 			showHelp(args[0]);
@@ -266,6 +268,11 @@ public void viewMember(String[] args) {
 		fw.overwriteMemberFile(memberList);
 	}
 
+/**
+ * Print a specific member.
+ * @param member The member to be printed.
+ * @param isVerbose Whether to print it verbosely.
+ */
 private void printMember(Member member, boolean isVerbose) {
 	System.out.println("Name: " + member.getName() + " " +
 			(isVerbose ? "Personal number: " + member.getPersonalNum() + " " : "") + 
@@ -290,5 +297,21 @@ private void printMember(Member member, boolean isVerbose) {
 			System.err.println(e.getMessage());
 			System.exit(-2);
 		}
+	}
+
+	/**
+ 	* Iterates the member list, to find the right member. If he is not found, returns null.
+ 	* @param idString The id string of the member to be returned.
+ 	* @return The member with the given id, or, if he is not found, null.
+ 	*/
+	private Member getMemberById(String idString) {
+		int size = memberList.size();
+		for (int i = 0; i < size; i++) {
+			Member member = memberList.get(i);
+			if (idString.equals(member.getIdString())) {
+				return member;
+			}
+		}
+		return null;
 	}
 }
