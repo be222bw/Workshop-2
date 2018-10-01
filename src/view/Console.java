@@ -47,6 +47,9 @@ public class Console {
 		case "/cbi":
 			changeBoatInfo(args);
 			break;
+		case "/rnb":
+			registerNewBoat(args);
+			break;
 		default:
 			System.out.println("Could not identify argument \"" + args[0] + "\"");
 			break;
@@ -149,6 +152,9 @@ public class Console {
 		case "/cbi":
 			System.out.println("Change boat info. Syntax is /cbi /ct <new type> or /cm /cl <new length>.");
 			break;
+		case "/rnb":
+			System.out.println("Register new boat. Syntax is /rnb <id> \"<boat type>\" <boat length>.");
+			break;
 		default:
 			System.out.println("/cm Create member.");
 			System.out.println("/lm List members.");
@@ -156,6 +162,7 @@ public class Console {
 			System.out.println("/dm Delete member.");
 			System.out.println("/cmi Change member info.");
 			System.out.println("/cbi Change boat info.");
+			System.out.println("/rnb Register new boat.");
 		}
 	}
 	
@@ -172,8 +179,16 @@ public class Console {
 	}
 	
 	public void registerNewBoat(String[] args) {
-		
+		if (args.length > 1 && args[1].equals("/?")) {
+			showHelp(args[0]);
+			return;
 		}
+		tooFewArguments(args.length < 4);
+	
+		Member member = getMemberById(args[1]);
+		Boat boat = new Boat(args[2], Double.parseDouble(args[3]));
+		member.assignBoat(boat);
+	}
 	
 	
 	public void createMember(String args[]) {
@@ -200,7 +215,8 @@ public class Console {
 		for (int i = 4; i < numOfBoats * 2 + 3; i += 2) {
 			type = args[i];
 			length = Double.parseDouble(args[i + 1]);
-			member.assignBoat(type, length);
+			Boat boat = new Boat(type, length);
+			member.assignBoat(boat);
 		}
 		
 		fw.writeMemberData(member);

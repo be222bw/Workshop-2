@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.UUID;
 
+import model.Boat;
 import model.Member;
 
 public class FileRead {
@@ -49,7 +50,8 @@ public class FileRead {
 				we = fileScan.next();
 				we = fileScan.next();
 				length = Double.parseDouble(we);
-				member.assignBoat(type, length);
+				Boat boat = new Boat(type, length);
+				member.assignBoat(boat);
 			}
 			memberList.add(member);
 		}

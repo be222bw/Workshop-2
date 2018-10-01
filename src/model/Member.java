@@ -53,8 +53,14 @@ public class Member {
 	 * @param type Type of boat
 	 * @param length Length of boat.
 	 */
-	public void assignBoat(String type, double length) {
-		boatList.add(new Boat(type, length));
+	public void assignBoat(Boat boat) {
+		boatList.add(boat);
+		numOfBoats++;
+	}
+	
+	public void deleteBoat(int i) {
+		boatList.remove(i);
+		numOfBoats--;
 	}
 	
 	public String getName() {
