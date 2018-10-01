@@ -1,6 +1,8 @@
 package view;
 
 import java.util.ArrayList;
+
+import model.Boat;
 import model.Member;
 
 public class Console {
@@ -35,10 +37,68 @@ public class Console {
 		case "/dm":
 			deleteMember(args);
 			break;
+		case "/cmi":
+			changeMemberInfo(args);
+			break;
+		case "/cbi":
+			changeBoatInfo(args);
+			break;
 		default:
 			System.out.println("Could not identify argument \"" + args[0] + "\"");
 			break;
 		}
+	}
+	
+	
+	
+	public Member getMemberById(String idString) {
+		int size = memberList.size();
+		for (int i = 0; i < size; i++) {
+			Member member = memberList.get(i);
+			if (idString.equals(member.getIdString())) {
+				return member;
+			}
+		}
+		return null;
+	}
+	
+	public void changeBoatInfo(String[] args) {
+		tooFewArguments(args.length < 5);
+		
+		String idString = args[1];
+		Member member = getMemberById(idString);
+		int boatNumber = Integer.parseInt(args[2]);
+		Boat boat = member.getBoat(boatNumber);
+		
+		switch (args[3]) {
+		case "/ct":
+			boat.setType(args[4]);
+			break;
+		case "/cl":
+			boat.setLength(Double.parseDouble(args[4]));
+			break;
+		default:
+			System.err.println("Could not identify parameter \"" + args[3] + ".\"");
+		}
+	}
+	
+	public void changeMemberInfo(String[] args) {
+		tooFewArguments(args.length < 4);
+		
+		String idString = args[1];
+		Member member = getMemberById(idString);
+		
+		switch (args[2]) {
+		case "/cn":
+			member.setName(args[3]);
+			break;
+		case "/cpn":
+			member.setPersonalNum(args[3]);
+			break;
+		default:
+			System.err.println("Could not identify parameter \"" + args[3] + ".\"");;
+		}
+		fw.overwriteMemberFile(memberList);
 	}
 	
 	public void showHelp(String args[]) {
@@ -54,32 +114,37 @@ public class Console {
 			}
 	}
 	
+	public void registerNewBoat(String[] args) {
+	
+	}
+	
+	/**
+	 * Throws an exception if there are too few arguments.
+	 * @param shallThrow Whether it shall be thrown or not.
+	 */
+	public void tooFewArguments(boolean shallThrow) { // I throw this exception so much, I might as well automise it.
+		try {
+			if (shallThrow) {
+				throw new Exception("Too few arguments!");
+			}
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+			System.exit(-2);
+		}
+	}
+	
 	public void createMember(String args[]) {
-		try {
-			if (args.length < 4) {
-				throw new Exception("Not enough arguments!");
-			}
-		} catch (Exception e) {
-			System.err.println(e.getMessage());
-			System.exit(-1);
-		}
+		tooFewArguments(args.length < 4);
 		int numOfBoats = Integer.parseInt(args[3]);
-		try {
-			if (args.length < 4 + numOfBoats * 2) {
-				throw new Exception("Not enough arguments!");
-			}
-		} catch (Exception e) {
-			System.err.println(e.getMessage());
-			System.exit(-1);
-		}
+		tooFewArguments(args.length < 4 + numOfBoats * 2);
 		model.Member member = new model.Member(args[1], args[2], Integer.parseInt(args[3]));
 		try {
 			if (!model.Verification.isCorrect(member.getPersonalNum())) {
 				throw new Exception("The personal number is not correct!");
 			}
 		} catch (Exception e) {
-			System.err.println(e.getMessage() + " Exiting.");
-			System.exit(-1);
+			System.err.println(e.getMessage());
+			System.exit(-2);
 		}
 
 		String type;
@@ -103,23 +168,11 @@ public class Console {
 	}
 	
 public void viewMember(String[] args) {
-	try {
-		if (args.length < 2) {
-			throw new Exception("Not enough parameters!");
-		}
-	} catch (Exception e) {
-		System.err.println(e.getMessage());
-		System.exit(-3);
-	}
+	tooFewArguments(args.length < 2);
 	
 	String idString = args[1];
-	int size = memberList.size();
-	for (int i = 0; i < size; i++) {
-		Member member = memberList.get(i);
-		if (idString.equals(member.getIdString())) {
-			printMember(member, args.length > 2 && args[2].equals("/v"));
-		}
-	}
+	Member member = getMemberById(idString);
+	printMember(member, args.length > 2 && args[2].equals("/v"));
 }
 	
 	private void printMember(Member member, boolean isVerbose) {
@@ -134,14 +187,7 @@ public void viewMember(String[] args) {
 			}
 	}
 	public void deleteMember(String[] args) {
-		try {
-			if (args.length < 2) {
-				throw new Exception("Not enough parameters!");
-			}
-		} catch (Exception e) {
-			System.err.println(e.getLocalizedMessage());
-			System.exit(-3);
-		}
+		tooFewArguments(args.length < 2);
 		
 		String idString = args[1];
 		

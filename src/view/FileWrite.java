@@ -52,7 +52,7 @@ public class FileWrite {
 			fileOverwriter.print(member.getIdString() + " \"" +
 			member.getName() + "\" " +
 			member.getNumOfBoats() + " " +
-			member.getPersonalNum());
+			member.getPersonalNum() + " ");
 			
 			for (int n = 0; n < numOfBoats; n++) {
 				Boat boat = member.getBoat(n);
