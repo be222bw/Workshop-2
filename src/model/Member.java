@@ -32,6 +32,16 @@ public class Member {
 	 */
 	public Member(String name, String personalNumber, UUID id, int numOfBoats) {
 		this.name = name;
+		
+		try {
+			if (!Verification.isCorrect(personalNumber)) {
+				throw new Exception("Personal number is not living up to our expectations!");
+			}
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+			System.exit(-3);
+		}
+		
 		this.personalNumber = personalNumber;
 		this.id = id;
 		this.numOfBoats = numOfBoats;
@@ -51,12 +61,33 @@ public class Member {
 		return name;
 	}
 	
+	/**
+	 * Change the member's name.
+	 * @param name The name to which to change.
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	public Boat getBoat(int n) {
 		return boatList.get(n);
 	}
 	
 	public String getPersonalNum() {
 		return personalNumber;
+	}
+	
+	public void setPersonalNum(String personalNumber) {
+		try {
+			if (!Verification.isCorrect(personalNumber)) {
+				throw new Exception("Personal number is not living up to our expectations!");
+			}
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+			System.exit(-3);
+		}
+		
+		this.personalNumber = personalNumber;
 	}
 	
 	public String getIdString() {

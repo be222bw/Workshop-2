@@ -50,15 +50,7 @@ public class Console {
 	public void listMembers(String[] args) {
 			for (int i = 0; i < memberList.size(); i++) {
 				Member member = memberList.get(i);
-				System.out.println("Name: " + member.getName() + " " +
-				(args[1].equals("/v") ? "Personal number: " + member.getPersonalNum() + " " : "") + 
-				"Id: " + member.getIdString() + " Number of boats: " + member.getNumOfBoats());
-				if (args[1].equals("/v")) {
-					for (int n= 0; n < member.getNumOfBoats(); n++) {
-						model.Boat boat = member.getBoat(n);
-						System.out.println("Boat type: " + boat.getType() + " Length: " + boat.getLength() + " metres.");
-					}
-				}
+				printMember(member, args[1].equals("/v"));
 			}
 	}
 	
@@ -119,8 +111,28 @@ public void viewMember(String[] args) {
 		System.err.println(e.getMessage());
 		System.exit(-3);
 	}
+	
+	String idString = args[1];
+	int size = memberList.size();
+	for (int i = 0; i < size; i++) {
+		Member member = memberList.get(i);
+		if (idString.equals(member.getIdString())) {
+			printMember(member, args.length > 2 && args[2].equals("/v"));
+		}
+	}
 }
 	
+	private void printMember(Member member, boolean isVerbose) {
+		System.out.println("Name: " + member.getName() + " " +
+				(isVerbose ? "Personal number: " + member.getPersonalNum() + " " : "") + 
+				"Id: " + member.getIdString() + " Number of boats: " + member.getNumOfBoats());
+			if (isVerbose) {
+					for (int n= 0; n < member.getNumOfBoats(); n++) {
+						model.Boat boat = member.getBoat(n);
+						System.out.println("Boat type: " + boat.getType() + " Length: " + boat.getLength() + " metres.");
+					}
+			}
+	}
 	public void deleteMember(String[] args) {
 		try {
 			if (args.length < 2) {
