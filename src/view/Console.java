@@ -12,10 +12,13 @@ public class Console {
 	private FileRead fr;
 	private ArrayList<Member> memberList;
 	
+	/**
+	 * @param fileName The file name of the member registry.
+	 */
 	public Console(String fileName) {
 		fw = new FileWrite(fileName);
 		fr = new  FileRead(fileName);
-		memberList = fr.readMembers();
+		memberList = fr.readMembers(); // Memory for memberList is allocated in the constructor for FileRead.
 	}
 	/**
 	 * Identifies the first argument, and calls the relative method.

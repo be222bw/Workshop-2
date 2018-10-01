@@ -6,12 +6,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.UUID;
 
+import model.Member;
+
 public class FileRead {
 	private Scanner fileScan;
-	private ArrayList<model.Member> memberList;
+	private ArrayList<Member> memberList;
 	
 	public FileRead(String fileName) {
-		memberList = new ArrayList<model.Member>();
+		memberList = new ArrayList<Member>();
 		try {
 			fileScan = new Scanner(new File(fileName));
 		} catch (FileNotFoundException e) {
@@ -19,7 +21,7 @@ public class FileRead {
 		}
 	}
 	
-	public ArrayList<model.Member> readMembers() {
+	public ArrayList<Member> readMembers() {
 		while (fileScan.hasNext()) {
 			String id = fileScan.next();
 			
@@ -35,7 +37,7 @@ public class FileRead {
 			
 			UUID uuid = UUID.fromString(id);
 			
-			model.Member member = new model.Member(name, personalNumber, uuid, numOfBoats);
+			Member member = new Member(name, personalNumber, uuid, numOfBoats);
 			
 			String type;
 			double length;
