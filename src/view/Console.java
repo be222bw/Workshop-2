@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import model.Boat;
 import model.Member;
+import model.Verification;
 
 public class Console {
 
@@ -137,9 +138,9 @@ public class Console {
 		tooFewArguments(args.length < 4);
 		int numOfBoats = Integer.parseInt(args[3]);
 		tooFewArguments(args.length < 4 + numOfBoats * 2);
-		model.Member member = new model.Member(args[1], args[2], Integer.parseInt(args[3]));
+		Member member = new Member(args[1], args[2], Integer.parseInt(args[3]));
 		try {
-			if (!model.Verification.isCorrect(member.getPersonalNum())) {
+			if (!Verification.isCorrect(member.getPersonalNum())) {
 				throw new Exception("The personal number is not correct!");
 			}
 		} catch (Exception e) {
@@ -181,7 +182,7 @@ public void viewMember(String[] args) {
 				"Id: " + member.getIdString() + " Number of boats: " + member.getNumOfBoats());
 			if (isVerbose) {
 					for (int n= 0; n < member.getNumOfBoats(); n++) {
-						model.Boat boat = member.getBoat(n);
+						Boat boat = member.getBoat(n);
 						System.out.println("Boat type: " + boat.getType() + " Length: " + boat.getLength() + " metres.");
 					}
 			}
