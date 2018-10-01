@@ -27,7 +27,7 @@ public class Console {
 	public void identifyArgument(String[] args) {
 		switch (args[0]) {
 		case "/?":
-			showHelp(args);
+			showHelp(null);
 			break;
 		case "/cm":
 			createMember(args);
@@ -54,7 +54,11 @@ public class Console {
 	}
 	
 	
-	
+	/**
+	 * Iterates the member list, to find the right member. If he is not found, returns null.
+	 * @param idString The id string of the member to be returned.
+	 * @return The member with the given id, or, if he is not found, null.
+	 */
 	public Member getMemberById(String idString) {
 		int size = memberList.size();
 		for (int i = 0; i < size; i++) {
@@ -66,6 +70,10 @@ public class Console {
 		return null;
 	}
 	
+	/**
+	 * Changes either the type or length of a boat.
+	 * @param args The arguments used.
+	 */
 	public void changeBoatInfo(String[] args) {
 		tooFewArguments(args.length < 5);
 		
@@ -86,7 +94,17 @@ public class Console {
 		}
 	}
 	
+	/**
+	 * Changes either the name or the personal number of a member. Id cannot be changed, but the number of boats
+	 * is changed if one adds a boat or removes a boat, i.e. not here.
+	 * @param args The arguments used.
+	 */
 	public void changeMemberInfo(String[] args) {
+		if (args.length > 1 && args[1].equals("/?")) {
+			showHelp(args[0]);
+			return;
+		}
+		
 		tooFewArguments(args.length < 4);
 		
 		String idString = args[1];
@@ -105,39 +123,65 @@ public class Console {
 		fw.overwriteMemberFile(memberList);
 	}
 	
-	public void showHelp(String args[]) {
-		System.out.println("To create member, use command-line argument /cm \"<name>\" <number of boats> " + 
-				"<personal number>.");
-		System.out.println("To list members, use /lm /v.");
-	}
-	
-	public void listMembers(String[] args) {
-			for (int i = 0; i < memberList.size(); i++) {
-				Member member = memberList.get(i);
-				printMember(member, args[1].equals("/v"));
-			}
-	}
-	
-	public void registerNewBoat(String[] args) {
-	
-	}
-	
 	/**
-	 * Throws an exception if there are too few arguments.
-	 * @param shallThrow Whether it shall be thrown or not.
+	 * Lists of commands available in the programme, or shows how to use a comand.
+	 * @param args
 	 */
-	public void tooFewArguments(boolean shallThrow) { // I throw this exception so much, I might as well automise it.
-		try {
-			if (shallThrow) {
-				throw new Exception("Too few arguments!");
-			}
-		} catch (Exception e) {
-			System.err.println(e.getMessage());
-			System.exit(-2);
+	public void showHelp(String command) {
+		switch (command) {
+		case "/cm":
+			System.out.println("Create member. The syntax is /cm \"<name>\" <personal number> <number of boats> " +
+					"(<type of boat number one> <length of boat number one> ... <type of boat number n> <length of boat "
+					+ "number n>.");
+			break;
+		case "/lm":
+			System.out.println("List members. The syntax is /lm (/v). /v means a verbose list.");
+			break;
+		case "/vm":
+			System.out.println("View a specific member. The syntax is /vm <id>.");
+			break;
+		case "/dm":
+			System.out.println("Delete member. The syntax is /dm <id>.");
+			break;
+		case "/cmi":
+			System.out.println("Change member info. Syntax is /cm /cn <new name> or /cm /cpn <new personal number>.");
+			break;
+		case "/cbi":
+			System.out.println("Change boat info. Syntax is /cbi /ct <new type> or /cm /cl <new length>.");
+			break;
+		default:
+			System.out.println("/cm Create member.");
+			System.out.println("/lm List members.");
+			System.out.println("/vm View specific member.");
+			System.out.println("/dm Delete member.");
+			System.out.println("/cmi Change member info.");
+			System.out.println("/cbi Change boat info.");
 		}
 	}
 	
+	public void listMembers(String[] args) {
+		if (args.length > 1 && args[1].equals("/?")) {
+			showHelp(args[0]);
+			return;
+		}
+		for (int i = 0; i < memberList.size(); i++) {
+			Member member = memberList.get(i);
+			boolean isVerbose = args.length > 1 && args[1].equals("/v");
+			printMember(member, isVerbose);
+		}
+	}
+	
+	public void registerNewBoat(String[] args) {
+		
+		}
+	
+	
 	public void createMember(String args[]) {
+		if (args.length > 1 && args[1].equals("/?")) {
+			showHelp(args[0]);
+			return;
+		}
+		
 		tooFewArguments(args.length < 4);
 		int numOfBoats = Integer.parseInt(args[3]);
 		tooFewArguments(args.length < 4 + numOfBoats * 2);
@@ -172,6 +216,11 @@ public class Console {
 	}
 	
 public void viewMember(String[] args) {
+	if (args.length > 1 && args[1].equals("/?")) {
+		showHelp(args[0]);
+		return;
+	}
+	
 	tooFewArguments(args.length < 2);
 	
 	String idString = args[1];
@@ -179,18 +228,12 @@ public void viewMember(String[] args) {
 	printMember(member, args.length > 2 && args[2].equals("/v"));
 }
 	
-	private void printMember(Member member, boolean isVerbose) {
-		System.out.println("Name: " + member.getName() + " " +
-				(isVerbose ? "Personal number: " + member.getPersonalNum() + " " : "") + 
-				"Id: " + member.getIdString() + " Number of boats: " + member.getNumOfBoats());
-			if (isVerbose) {
-					for (int n= 0; n < member.getNumOfBoats(); n++) {
-						Boat boat = member.getBoat(n);
-						System.out.println("Boat type: " + boat.getType() + " Length: " + boat.getLength() + " metres.");
-					}
-			}
-	}
 	public void deleteMember(String[] args) {
+		if (args.length > 1 && args[1].equals("/?")) {
+			showHelp(args[0]);
+			return;
+		}
+		
 		tooFewArguments(args.length < 2);
 		
 		String idString = args[1];
@@ -205,5 +248,31 @@ public void viewMember(String[] args) {
 		}
 		
 		fw.overwriteMemberFile(memberList);
+	}
+
+private void printMember(Member member, boolean isVerbose) {
+	System.out.println("Name: " + member.getName() + " " +
+			(isVerbose ? "Personal number: " + member.getPersonalNum() + " " : "") + 
+			"Id: " + member.getIdString() + " Number of boats: " + member.getNumOfBoats());
+	if (isVerbose) {
+		for (int n= 0; n < member.getNumOfBoats(); n++) {
+			Boat boat = member.getBoat(n);
+			System.out.println("Boat type: " + boat.getType() + " Length: " + boat.getLength() + " metres.");
+		}
+	}
+}
+	/**
+ 	* Throws an exception if there are too few arguments.
+ 	* @param shallThrow Whether it shall be thrown or not.
+ 	*/
+	private void tooFewArguments(boolean shallThrow) { // I throw this exception so much, I might as well automise it.
+		try {
+			if (shallThrow) {
+				throw new Exception("Too few arguments!");
+			}
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+			System.exit(-2);
+		}
 	}
 }
