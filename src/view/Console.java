@@ -40,6 +40,9 @@ public class Console {
 		case "/dm":
 			deleteMember(args);
 			break;
+		case "/db":
+			deleteBoat(args);
+			break;
 		case "/cmi":
 			changeMemberInfo(args);
 			break;
@@ -57,6 +60,22 @@ public class Console {
 	
 	
 	
+	private void deleteBoat(String[] args) {
+		if (args.length > 1 && args[1].equals("/?")) {
+			showHelp(args[0]);
+			return;
+		}
+		tooFewArguments(args.length < 3);
+		String idString = args[1];
+		Member member = getMemberById(idString);
+		int i = Integer.parseInt(args[2]);
+		
+		member.deleteBoat(i);
+		member.decrementNumberOfBoats();
+		
+		fw.overwriteMemberFile(memberList);
+		
+	}
 	/**
 	 * Changes either the type or length of a boat.
 	 * @param args The arguments used.
@@ -121,6 +140,9 @@ public class Console {
 					"(<type of boat number one> <length of boat number one> ... <type of boat number n> <length of boat "
 					+ "number n>.");
 			break;
+		case "/db":
+			System.out.println("Delete boat. The syntax is /db <id> <boat index>.");
+			break;
 		case "/lm":
 			System.out.println("List members. The syntax is /lm (/v). /v means a verbose list.");
 			break;
@@ -141,6 +163,7 @@ public class Console {
 			break;
 		case "/h":
 			System.out.println("/cm Create member.");
+			System.out.println("/db Delete boat.");
 			System.out.println("/lm List members.");
 			System.out.println("/vm View specific member.");
 			System.out.println("/dm Delete member.");
@@ -183,6 +206,8 @@ public class Console {
 		Member member = getMemberById(args[1]);
 		Boat boat = new Boat(args[2], Double.parseDouble(args[3]));
 		member.assignBoat(boat);
+		member.incrementNumOfBoats();
+		fw.overwriteMemberFile(memberList);
 	}
 	
 	/**

@@ -55,8 +55,15 @@ public class Member {
 	 */
 	public void assignBoat(Boat boat) {
 		boatList.add(boat);
+	}
+	
+	/**
+	 * Increments the number of boats.
+	 */
+	public void incrementNumOfBoats() {
 		numOfBoats++;
 	}
+	
 	
 	/**
 	 * Deletes the boat specified by the index.
@@ -64,6 +71,12 @@ public class Member {
 	 */
 	public void deleteBoat(int i) {
 		boatList.remove(i);
+	}
+	
+	/**
+	 * Decrements the number of boats.
+	 */
+	public void decrementNumberOfBoats() {
 		numOfBoats--;
 	}
 	

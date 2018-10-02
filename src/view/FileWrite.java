@@ -39,6 +39,11 @@ public class FileWrite {
 		member.getNumOfBoats() +  " " +
 		member.getPersonalNum());
 		for (int i = 0; i < numOfBoats; i++) {
+			if (numOfBoats == 0) {
+				pw.println();
+				pw.close();
+				return;
+			}
 			Boat boat = member.getBoat(i);
 			pw.append((i == 0 ? " " : "") + "\"" + boat.getType() + "\" " + boat.getLength() + 
 					(i == numOfBoats - 1 ? "\r\n"  : " "));
@@ -54,7 +59,7 @@ public class FileWrite {
 		try {
 			fileOverwriter = new PrintWriter(registry);
 		} catch (FileNotFoundException e) {
-			System.err.println(e.getLocalizedMessage());
+			System.err.println(e.getMessage());
 			System.exit(-2);
 		}
 		int size = members.size();
@@ -63,12 +68,16 @@ public class FileWrite {
 			int numOfBoats = member.getNumOfBoats();
 			fileOverwriter.print(member.getIdString() + " \"" +
 			member.getName() + "\" " +
-			member.getNumOfBoats() + " " +
-			member.getPersonalNum() + " ");
+			member.getPersonalNum() + " " +
+			member.getNumOfBoats());
 			
 			for (int n = 0; n < numOfBoats; n++) {
+				if (numOfBoats == 0) {
+					fileOverwriter.println();
+					break;
+				}
 				Boat boat = member.getBoat(n);
-				fileOverwriter.print("\"" +boat.getType() + " \" " + boat.getLength() +
+				fileOverwriter.print((n == 0 ? " " : "") +"\"" +boat.getType() + "\" " + boat.getLength() +
 						(n == numOfBoats - 1 ? "\r\n" : " "));
 			}
 		}
