@@ -11,7 +11,7 @@ public class Console {
 	private controller.FileRead fr;
 	private ArrayList<Member> memberList;
 	
-	/**
+	/** Constructs a console object.
 	 * @param fileName The file name of the member registry.
 	 */
 	public Console(String fileName) {
@@ -81,6 +81,11 @@ public class Console {
 	 * @param args The arguments used.
 	 */
 	public void changeBoatInfo(String[] args) {
+		if (args[args.length - 1].equals("/h")) {
+			showHelp(args[0]);
+			return;
+		}
+		
 		tooFewArguments(args.length < 5);
 		
 		String idString = args[1];
@@ -141,16 +146,16 @@ public class Console {
 					+ "number n>.");
 			break;
 		case "/db":
-			System.out.println("Delete boat. The syntax is /db <id> <boat index>.");
+			System.out.println("Delete boat. The syntax is /db <member id> <boat index>.");
 			break;
 		case "/lm":
 			System.out.println("List members. The syntax is /lm (/v). /v means a verbose list.");
 			break;
 		case "/vm":
-			System.out.println("View a specific member. The syntax is /vm <id>.");
+			System.out.println("View a specific member. The syntax is /vm <member id>.");
 			break;
 		case "/dm":
-			System.out.println("Delete member. The syntax is /dm <id>.");
+			System.out.println("Delete member. The syntax is /dm <member id>.");
 			break;
 		case "/cmi":
 			System.out.println("Change member info. Syntax is /cm /cn <new name> or /cm /cpn <new personal number>.");
@@ -159,7 +164,7 @@ public class Console {
 			System.out.println("Change boat info. Syntax is /cbi /ct <new type> or /cm /cl <new length>.");
 			break;
 		case "/rnb":
-			System.out.println("Register new boat. Syntax is /rnb <id> \"<boat type>\" <boat length>.");
+			System.out.println("Register new boat. Syntax is /rnb <member id> \"<boat type>\" <boat length>.");
 			break;
 		case "/h":
 			System.out.println("/cm Create member.");

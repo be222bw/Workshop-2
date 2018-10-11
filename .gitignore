@@ -1,6 +1,8 @@
-/bin/
-
+crud.jar
 *.txt
 
 *.prefs
 *.zip
+*.classpath
+*.project
+/bin/
