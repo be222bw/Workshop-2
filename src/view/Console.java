@@ -61,7 +61,7 @@ public class Console {
 	
 	
 	private void deleteBoat(String[] args) {
-		if (args.length > 1 && args[1].equals("/?")) {
+		if (args[args.length - 1].equals("/h")) {
 			showHelp(args[0]);
 			return;
 		}
@@ -106,7 +106,7 @@ public class Console {
 	 * @param args The arguments.
 	 */
 	public void changeMemberInfo(String[] args) {
-		if (args.length > 1 && args[1].equals("/h")) {
+		if (args[args.length - 1].equals("/h")) {
 			showHelp(args[0]);
 			return;
 		}
@@ -181,7 +181,7 @@ public class Console {
 	 * @param args The arguments.
 	 */
 	public void listMembers(String[] args) {
-		if (args.length > 1 && args[1].equals("/h")) {
+		if (args[args.length - 1].equals("/h")) {
 			showHelp(args[0]);
 			return;
 		}
@@ -197,7 +197,7 @@ public class Console {
 	 * @param args The arguments.
 	 */
 	public void registerNewBoat(String[] args) {
-		if (args.length > 1 && args[1].equals("/h")) {
+		if (args[args.length - 1].equals("/h")) {
 			showHelp(args[0]);
 			return;
 		}
@@ -215,7 +215,7 @@ public class Console {
 	 * @param args The arguments.
 	 */
 	public void createMember(String args[]) {
-		if (args.length > 1 && args[1].equals("/h")) {
+		if (args[args.length - 1].equals("/h")) {
 			showHelp(args[0]);
 			return;
 		}
@@ -258,7 +258,7 @@ public class Console {
 	 * @param args The arguments.
 	 */
 public void viewMember(String[] args) {
-	if (args.length > 1 && args[1].equals("/h")) {
+	if (args[args.length - 1].equals("/h")) {
 		showHelp(args[0]);
 		return;
 	}
@@ -274,7 +274,7 @@ public void viewMember(String[] args) {
  * @param args The arguments.
  */
 	public void deleteMember(String[] args) {
-		if (args.length > 1 && args[1].equals("/h")) {
+		if (args[args.length - 1].equals("/h")) {
 			showHelp(args[0]);
 			return;
 		}
