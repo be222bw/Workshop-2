@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
  * @author Björn Elmqvist
  *
  */
-public class Verification {
+public class PersonalNumberValidation {
 	/**
 	 * Checks whether there are the correct amount of digits and if there is a correct delimiter.
 	 * @param pNr The personal number to check.
