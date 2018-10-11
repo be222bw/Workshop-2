@@ -34,7 +34,7 @@ public class Member {
 		this.name = name;
 		
 		try {
-			if (!Verification.isCorrect(personalNumber)) {
+			if (!PersonalNumberValidation.isCorrect(personalNumber)) {
 				throw new Exception("Personal number is not living up to our expectations!");
 			}
 		} catch (Exception e) {
@@ -119,7 +119,7 @@ public class Member {
 	 */
 	public void setPersonalNum(String personalNumber) {
 		try {
-			if (!Verification.isCorrect(personalNumber)) {
+			if (!PersonalNumberValidation.isCorrect(personalNumber)) {
 				throw new Exception("Personal number is not living up to our expectations!");
 			}
 		} catch (Exception e) {
