@@ -7,16 +7,16 @@ import model.Member;
 import model.Verification;
 
 public class Console {
-	private FileWrite fw;
-	private FileRead fr;
+	private controller.FileWrite fw;
+	private controller.FileRead fr;
 	private ArrayList<Member> memberList;
 	
 	/**
 	 * @param fileName The file name of the member registry.
 	 */
 	public Console(String fileName) {
-		fw = new FileWrite(fileName);
-		fr = new  FileRead(fileName);
+		fw = new controller.FileWrite(fileName);
+		fr = new  controller.FileRead(fileName);
 		memberList = fr.readMembers(); // Memory for memberList is allocated in the constructor for FileRead.
 	}
 	/**

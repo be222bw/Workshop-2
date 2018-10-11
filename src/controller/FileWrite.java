@@ -1,4 +1,4 @@
-package view;
+package controller;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,7 +18,7 @@ public class FileWrite {
 	 * Construct a FileWrite object.
 	 * @param fileName The file name of the registry.
 	 */
-	FileWrite(String fileName) {
+	public FileWrite(String fileName) {
 		registry = new File(fileName);
 	}
 	
