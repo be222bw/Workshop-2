@@ -36,8 +36,8 @@ public class FileWrite {
 		int numOfBoats = member.getNumOfBoats();
 		pw.append(member.getIdString() + " \""+
 		member.getName() + "\" " + 
-		member.getNumOfBoats() +  " " +
-		member.getPersonalNum());
+		member.getPersonalNum() + " " +
+		member.getNumOfBoats());
 		for (int i = 0; i < numOfBoats; i++) {
 			if (numOfBoats == 0) {
 				pw.println();

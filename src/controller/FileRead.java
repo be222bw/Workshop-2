@@ -41,8 +41,8 @@ public class FileRead {
 			fileScan.reset();
 			fileScan.next();
 			
-			int numOfBoats = fileScan.nextInt();
 			String personalNumber = fileScan.next();
+			int numOfBoats = fileScan.nextInt();
 			
 			UUID uuid = UUID.fromString(id);
 			
