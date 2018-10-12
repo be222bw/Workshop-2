@@ -223,7 +223,7 @@ public class Console {
 		}
 		
 		tooFewArguments(args.length < 3);
-		Member member = new Member(args[1], args[2], 0);
+		Member member = new Member(args[1], args[2], 0); // When creating member, start with no boats.
 		
 		fw.writeMemberData(member);
 		

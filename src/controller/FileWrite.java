@@ -38,12 +38,13 @@ public class FileWrite {
 		member.getName() + "\" " + 
 		member.getPersonalNum() + " " +
 		member.getNumOfBoats());
+		if (numOfBoats == 0) {
+			pw.println();
+			pw.close();
+			return;
+		}
+		
 		for (int i = 0; i < numOfBoats; i++) {
-			if (numOfBoats == 0) {
-				pw.println();
-				pw.close();
-				return;
-			}
 			Boat boat = member.getBoat(i);
 			pw.append((i == 0 ? " " : "") + "\"" + boat.getType() + "\" " + boat.getLength() + 
 					(i == numOfBoats - 1 ? "\r\n"  : " "));
