@@ -7,7 +7,7 @@ public class Member {
 	private String name;
 	private int numOfBoats;
 	private ArrayList<Boat> boatList;
-	private String personalNumber;
+	private PersonalNumber personalNumber;
 	private UUID id;
 	
 	/** Construct a Member object and assign a random id.
@@ -19,7 +19,7 @@ public class Member {
 		this.name = name;
 		this.numOfBoats = numOfBoats;
 		this.id = UUID.randomUUID();
-		this.personalNumber = personalNumber;
+		this.personalNumber = new PersonalNumber(personalNumber);
 		this.boatList = new ArrayList<Boat>();
 	}
 	
@@ -32,9 +32,10 @@ public class Member {
 	 */
 	public Member(String name, String personalNumber, UUID id, int numOfBoats) {
 		this.name = name;
+		this.personalNumber = new PersonalNumber(personalNumber);
 		
 		try {
-			if (!PersonalNumberValidation.isCorrect(personalNumber)) {
+			if (!this.personalNumber.isCorrect()) {
 				throw new Exception("Personal number is not living up to our expectations!");
 			}
 		} catch (Exception e) {
@@ -42,7 +43,6 @@ public class Member {
 			System.exit(-3);
 		}
 		
-		this.personalNumber = personalNumber;
 		this.id = id;
 		this.numOfBoats = numOfBoats;
 		boatList = new ArrayList<Boat>();
@@ -109,7 +109,7 @@ public class Member {
 	 * Get the member's personal number.
 	 * @return The personal number.
 	 */
-	public String getPersonalNum() {
+	public PersonalNumber getPersonalNum() {
 		return personalNumber;
 	}
 	
@@ -118,8 +118,9 @@ public class Member {
 	 * @param personalNumber The new personal number.
 	 */
 	public void setPersonalNum(String personalNumber) {
+		this.personalNumber = new PersonalNumber(personalNumber);
 		try {
-			if (!PersonalNumberValidation.isCorrect(personalNumber)) {
+			if (!this.personalNumber.isCorrect()) {
 				throw new Exception("Personal number is not living up to our expectations!");
 			}
 		} catch (Exception e) {
@@ -127,7 +128,7 @@ public class Member {
 			System.exit(-3);
 		}
 		
-		this.personalNumber = personalNumber;
+		this.personalNumber = new PersonalNumber(personalNumber);
 	}
 	
 	/**

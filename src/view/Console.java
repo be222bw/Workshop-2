@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import model.Boat;
 import model.Member;
-import model.PersonalNumberValidation;
 
 public class Console {
 	private controller.FileWrite fw;
@@ -230,7 +229,7 @@ public class Console {
 		tooFewArguments(args.length < 4 + numOfBoats * 2);
 		Member member = new Member(args[1], args[2], Integer.parseInt(args[3]));
 		try {
-			if (!PersonalNumberValidation.isCorrect(member.getPersonalNum())) {
+			if (!(member.getPersonalNum().isCorrect())) {
 				throw new Exception("The personal number is not correct!");
 			}
 		} catch (Exception e) {
