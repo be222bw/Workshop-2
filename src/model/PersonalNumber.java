@@ -19,13 +19,21 @@ public class PersonalNumber {
 	 */
 	public PersonalNumber(String personalNumber) {
 		this.personalNumber = personalNumber;
+		try {
+			if (!isCorrect()) {
+				throw new Exception("Personal number is not living up to our expectations!");
+			}
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+			System.exit(-3);
+		}
 	}
 	
 	/**
 	 * Checks whether there are the correct amount of digits and if there is a correct delimiter.
 	 * @return The validity of the number.
 	 */
-	public boolean hasReasonableDigits() {
+	private boolean hasReasonableDigits() {
 		return Pattern.matches("^[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])(-|\\+)[0-9]{4}$", personalNumber);
 	}
 	
@@ -33,7 +41,7 @@ public class PersonalNumber {
 	 * Checks the control sum.
 	 * @return The validity of the control sum.
 	 */
-	public boolean checkControlSum() {
+	private boolean checkControlSum() {
 		int sum = 0;
 		boolean correct = false;
 		String numericalPnr = personalNumber.substring(0, 6) + personalNumber.substring(7); // New string without hyphen or plus.
@@ -52,27 +60,10 @@ public class PersonalNumber {
 	}
 	
 	/**
-	 * Gets the first part of the number, before the delimiter.
-	 * @return The first part of the number.
-	 */
-	public String getFirstPart() {
-		return personalNumber.substring(0, personalNumber.length() - 5);
-	}
-	
-	/**
-	 * Gets the second part, after the delimiter.
-	 * @return The second part of the number.
-	 */
-	public String getSecondPart() {
-		return personalNumber.substring(personalNumber.length() - 4, personalNumber.length());
-	}
-	
-	
-	/**
 	 * Checks whether the month supplied in the personal number has enough days.
 	 * @return Whether the month has enough days or not.
 	 */
-	public boolean hasReasonableDay() {
+	private boolean hasReasonableDay() {
 		final int[] daysAMonth = {31, (isLeapYear() ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 		
 		int day = Integer.parseInt(personalNumber.substring(4, 6));
@@ -90,7 +81,7 @@ public class PersonalNumber {
 	 * @param pNr The personal number.
 	 * @return The being or not-being a leap year.
 	 */
-	public boolean isLeapYear() {
+	private boolean isLeapYear() {
 		int year = toLongYear();
 		
 		if (year % 100 == 0 && year % 400 == 0 || year % 4 == 0) {
@@ -104,7 +95,7 @@ public class PersonalNumber {
 	 * Gets the year in four digits.
 	 * @return The year in four digits.
 	 */
-	public int toLongYear() {
+	private int toLongYear() {
 		int shortYear = Integer.parseInt(personalNumber.substring(0, 2));
 		boolean overOneHundred = personalNumber.substring(6, 7).equals("+");
 		int currentYear = Year.now().getValue();
@@ -124,7 +115,7 @@ public class PersonalNumber {
 	 * Checks the validity of the entire personal number.
 	 * @return The validity of the personal number.
 	 */
-	public boolean isCorrect() {
+	private boolean isCorrect() {
 		if (!hasReasonableDigits()) {
 			return false;
 		}

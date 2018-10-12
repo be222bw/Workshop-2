@@ -33,16 +33,6 @@ public class Member {
 	public Member(String name, String personalNumber, UUID id, int numOfBoats) {
 		this.name = name;
 		this.personalNumber = new PersonalNumber(personalNumber);
-		
-		try {
-			if (!this.personalNumber.isCorrect()) {
-				throw new Exception("Personal number is not living up to our expectations!");
-			}
-		} catch (Exception e) {
-			System.err.println(e.getMessage());
-			System.exit(-3);
-		}
-		
 		this.id = id;
 		this.numOfBoats = numOfBoats;
 		boatList = new ArrayList<Boat>();
@@ -118,16 +108,6 @@ public class Member {
 	 * @param personalNumber The new personal number.
 	 */
 	public void setPersonalNum(String personalNumber) {
-		this.personalNumber = new PersonalNumber(personalNumber);
-		try {
-			if (!this.personalNumber.isCorrect()) {
-				throw new Exception("Personal number is not living up to our expectations!");
-			}
-		} catch (Exception e) {
-			System.err.println(e.getMessage());
-			System.exit(-3);
-		}
-		
 		this.personalNumber = new PersonalNumber(personalNumber);
 	}
 	
