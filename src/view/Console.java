@@ -140,9 +140,7 @@ public class Console {
 	public void showHelp(String command) {
 		switch (command) {
 		case "/cm":
-			System.out.println("Create member. The syntax is /cm \"<name>\" <personal number> <number of boats> " +
-					"(<type of boat number one> <length of boat number one> ... <type of boat number n> <length of boat "
-					+ "number n>.");
+			System.out.println("Create member. The syntax is /cm \"<name>\" <personal number>");
 			break;
 		case "/db":
 			System.out.println("Delete boat. The syntax is /db <member id> <boat index>.");
@@ -224,30 +222,14 @@ public class Console {
 			return;
 		}
 		
-		tooFewArguments(args.length < 4);
-		int numOfBoats = Integer.parseInt(args[3]);
-		tooFewArguments(args.length < 4 + numOfBoats * 2);
-		Member member = new Member(args[1], args[2], Integer.parseInt(args[3]));
-
-		String type;
-		double length;
-		for (int i = 4; i < numOfBoats * 2 + 3; i += 2) {
-			type = args[i];
-			length = Double.parseDouble(args[i + 1]);
-			Boat boat = new Boat(type, length);
-			member.assignBoat(boat);
-		}
+		tooFewArguments(args.length < 3);
+		Member member = new Member(args[1], args[2], 0);
 		
 		fw.writeMemberData(member);
 		
 		System.out.println("Name: " + member.getName() +
-				"\nPersonal number: " + member.getPersonalNum() + "\nNumber of boats: " +
+				"\nPersonal number: " + member.getPersonalNum().toString() + "\nNumber of boats: " +
 				member.getNumOfBoats() + "\nId: " + member.getIdString());
-		
-		for (int i = 0; i < numOfBoats; i++) {
-			System.out.println("Boat number " + (i + 1) + ":\n" + member.getBoat(i).getType() + " " +
-		member.getBoat(i).getLength() + " metres.");
-		}
 	}
 	
 	/** Views a specific member.
@@ -298,7 +280,7 @@ public void viewMember(String[] args) {
  */
 private void printMember(Member member, boolean isVerbose) {
 	System.out.println("Name: " + member.getName() + " " +
-			(isVerbose ? "Personal number: " + member.getPersonalNum() + " " : "") + 
+			(isVerbose ? "Personal number: " + member.getPersonalNum().toString() + " " : "") + 
 			"Id: " + member.getIdString() + " Number of boats: " + member.getNumOfBoats());
 	if (isVerbose) {
 		for (int n= 0; n < member.getNumOfBoats(); n++) {

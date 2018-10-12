@@ -128,4 +128,8 @@ public class PersonalNumber {
 		
 		return true;
 	}
+	
+	public String toString() {
+		return personalNumber;
+	}
 }
