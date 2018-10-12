@@ -228,14 +228,6 @@ public class Console {
 		int numOfBoats = Integer.parseInt(args[3]);
 		tooFewArguments(args.length < 4 + numOfBoats * 2);
 		Member member = new Member(args[1], args[2], Integer.parseInt(args[3]));
-		try {
-			if (!(member.getPersonalNum().isCorrect())) {
-				throw new Exception("The personal number is not correct!");
-			}
-		} catch (Exception e) {
-			System.err.println(e.getMessage());
-			System.exit(-2);
-		}
 
 		String type;
 		double length;
