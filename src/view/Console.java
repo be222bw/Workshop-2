@@ -277,9 +277,9 @@ public void viewMember(String[] args) {
  * @param isVerbose Whether to print it verbosely.
  */
 private void printMember(Member member, boolean isVerbose) {
-	System.out.println("Name: " + member.getName() + " " +
-			(isVerbose ? "Personal number: " + member.getPersonalNum().toString() + " " : "") + 
-			"Id: " + member.getIdString() + " Number of boats: " + member.getNumOfBoats());
+	System.out.println("Name: " + member.getName() + "\r\n" +
+			(isVerbose ? "Personal number: " + member.getPersonalNum().toString() + "\r\n" : "") + 
+			"Id: " + member.getIdString() + "\r\nNumber of boats: " + member.getNumOfBoats());
 	if (isVerbose) {
 		for (int n= 0; n < member.getNumOfBoats(); n++) {
 			Boat boat = member.getBoat(n);
