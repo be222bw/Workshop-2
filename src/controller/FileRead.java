@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.UUID;
 
 import model.Boat;
 import model.Member;
@@ -44,7 +43,7 @@ public class FileRead {
 			String personalNumber = fileScan.next();
 			int numOfBoats = fileScan.nextInt();
 			
-			UUID uuid = UUID.fromString(id);
+			String uuid = id;
 			
 			Member member = new Member(name, personalNumber, uuid, numOfBoats);
 			

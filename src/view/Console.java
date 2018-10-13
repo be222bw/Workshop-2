@@ -227,9 +227,7 @@ public class Console {
 		
 		fw.writeMemberData(member);
 		
-		System.out.println("Name: " + member.getName() +
-				"\nPersonal number: " + member.getPersonalNum().toString() + "\nNumber of boats: " +
-				member.getNumOfBoats() + "\nId: " + member.getIdString());
+		printMember(member, false);
 	}
 	
 	/** Views a specific member.

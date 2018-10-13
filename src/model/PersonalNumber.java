@@ -4,8 +4,7 @@ import java.time.Year;
 import java.util.regex.Pattern;
 
 /** 
- * This class is about verifying the validity of the personal number, a task more complex than it may seem.
- * This is my own code from an earlier Java project.
+ * Personal number with validation. Most of this class is self-contained. Modified version of one of my old projects.
  * @author Björn Elmqvist
  *
  */
@@ -129,6 +128,9 @@ public class PersonalNumber {
 		return true;
 	}
 	
+	/** Returns the String representation of a personal number.
+	 * @return The String representation of the personal number.
+	 */
 	public String toString() {
 		return personalNumber;
 	}
