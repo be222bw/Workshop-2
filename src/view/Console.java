@@ -100,7 +100,7 @@ public class Console {
 			boat.setLength(Double.parseDouble(args[4]));
 			break;
 		default:
-			System.err.println("Could not identify parameter \"" + args[1] + ".\"");
+			System.err.println("Could not identify parameter \"" + args[1] + "\".");
 			break;
 		}
 		
@@ -143,7 +143,7 @@ public class Console {
 	public void showHelp(String command) {
 		switch (command) {
 		case "/cm":
-			System.out.println("Create member. The syntax is /cm \"<name>\" <personal number>");
+			System.out.println("Create member. The syntax is /cm <name> <personal number>.");
 			break;
 		case "/db":
 			System.out.println("Delete boat. The syntax is /db <member id> <boat index>.");
@@ -152,21 +152,21 @@ public class Console {
 			System.out.println("List members. The syntax is /lm (/v). /v means a verbose list.");
 			break;
 		case "/vm":
-			System.out.println("View a specific member. The syntax is /vm <member id>.");
+			System.out.println("View a specific member. The syntax is /vm (/v) <member id>. /v means a verbose view.");
 			break;
 		case "/dm":
 			System.out.println("Delete member. The syntax is /dm <member id>.");
 			break;
 		case "/cmi":
-			System.out.println("Change member info. Syntax is /cmi /cn <member id> \"<new name>\" or" +
-					"/cmi /cpn <member id> <new personal number>.");
+			System.out.println("Change member info. Syntax is /cmi /cn <member id> <new name> or" +
+					" /cmi /cpn <member id> <new personal number>.");
 			break;
 		case "/cbi":
 			System.out.println("Change boat info. Syntax is /cbi /ct <member id> <boat index> <new type> " +
 					"or /cm /cl <member id> <boat index> <new length>.");
 			break;
 		case "/rnb":
-			System.out.println("Register new boat. Syntax is /rnb <member id> \"<boat type>\" <boat length>.");
+			System.out.println("Register new boat. Syntax is /rnb <member id> <boat type> <boat length>.");
 			break;
 		case "/h":
 			System.out.println("/cm Create member.");
@@ -177,6 +177,7 @@ public class Console {
 			System.out.println("/cmi Change member info.");
 			System.out.println("/cbi Change boat info.");
 			System.out.println("/rnb Register new boat.");
+			System.out.println("Type <parameter> /h for more specific help.");
 			break;
 		default:
 			System.out.println("Parameter not recognised!");
@@ -246,9 +247,10 @@ public void viewMember(String[] args) {
 	
 	tooFewArguments(args.length < 2);
 	
-	String idString = args[1];
+	boolean isVerbose = args.length > 2 &&  args[1].equals("/v");
+	String idString = (isVerbose ? args[2] : args[1]); //If /v is supplied, id is the third parameter.
 	Member member = getMemberById(idString);
-	printMember(member, args.length > 2 && args[2].equals("/v"));
+	printMember(member, isVerbose);
 }
 	
 /** Deletes a specific member.
