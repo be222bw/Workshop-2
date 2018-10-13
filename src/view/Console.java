@@ -283,7 +283,7 @@ private void printMember(Member member, boolean isVerbose) {
 	if (isVerbose) {
 		for (int n= 0; n < member.getNumOfBoats(); n++) {
 			Boat boat = member.getBoat(n);
-			System.out.println("Boat type: " + boat.getType() + " Length: " + boat.getLength() + " metres.");
+			System.out.println("\tBoat type: " + boat.getType() + " Length: " + boat.getLength() + " metres.");
 		}
 	}
 }
