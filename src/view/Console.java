@@ -87,12 +87,12 @@ public class Console {
 		
 		tooFewArguments(args.length < 5);
 		
-		String idString = args[1];
+		String idString = args[2];
 		Member member = getMemberById(idString);
-		int boatNumber = Integer.parseInt(args[2]);
-		Boat boat = member.getBoat(boatNumber);
+		int boatIndex = Integer.parseInt(args[3]);
+		Boat boat = member.getBoat(boatIndex);
 		
-		switch (args[3]) {
+		switch (args[1]) {
 		case "/ct":
 			boat.setType(args[4]);
 			break;
@@ -100,8 +100,11 @@ public class Console {
 			boat.setLength(Double.parseDouble(args[4]));
 			break;
 		default:
-			System.err.println("Could not identify parameter \"" + args[3] + ".\"");
+			System.err.println("Could not identify parameter \"" + args[1] + ".\"");
+			break;
 		}
+		
+		fw.overwriteMemberFile(memberList);
 	}
 	
 	/**
@@ -117,10 +120,10 @@ public class Console {
 		
 		tooFewArguments(args.length < 4);
 		
-		String idString = args[1];
+		String idString = args[2];
 		Member member = getMemberById(idString);
 		
-		switch (args[2]) {
+		switch (args[1]) {
 		case "/cn":
 			member.setName(args[3]);
 			break;
@@ -155,10 +158,12 @@ public class Console {
 			System.out.println("Delete member. The syntax is /dm <member id>.");
 			break;
 		case "/cmi":
-			System.out.println("Change member info. Syntax is /cm /cn <new name> or /cm /cpn <new personal number>.");
+			System.out.println("Change member info. Syntax is /cmi /cn <member id> \"<new name>\" or" +
+					"/cmi /cpn <member id> <new personal number>.");
 			break;
 		case "/cbi":
-			System.out.println("Change boat info. Syntax is /cbi /ct <new type> or /cm /cl <new length>.");
+			System.out.println("Change boat info. Syntax is /cbi /ct <member id> <boat index> <new type> " +
+					"or /cm /cl <member id> <boat index> <new length>.");
 			break;
 		case "/rnb":
 			System.out.println("Register new boat. Syntax is /rnb <member id> \"<boat type>\" <boat length>.");
