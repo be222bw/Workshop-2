@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import model.Boat;
 import model.Member;
 
-public class FileWrite {
+public class FileWriter {
 	private File registry;
 	private PrintWriter pw;
 	private PrintWriter fileOverwriter;
@@ -18,7 +18,7 @@ public class FileWrite {
 	 * Construct a FileWrite object.
 	 * @param fileName The file name of the registry.
 	 */
-	public FileWrite(String fileName) {
+	public FileWriter(String fileName) {
 		registry = new File(fileName);
 	}
 	

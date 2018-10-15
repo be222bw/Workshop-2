@@ -6,16 +6,16 @@ import model.Boat;
 import model.Member;
 
 public class Console {
-	private controller.FileWrite fw;
-	private controller.FileRead fr;
+	private controller.FileWriter fw;
+	private controller.FileReader fr;
 	private ArrayList<Member> memberList;
 	
 	/** Constructs a console object.
 	 * @param fileName The file name of the member registry.
 	 */
 	public Console(String fileName) {
-		fw = new controller.FileWrite(fileName);
-		fr = new  controller.FileRead(fileName);
+		fw = new controller.FileWriter(fileName);
+		fr = new  controller.FileReader(fileName);
 		memberList = fr.readMembers(); // Memory for memberList is allocated in the constructor for FileRead.
 	}
 	/**

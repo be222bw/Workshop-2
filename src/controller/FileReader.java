@@ -8,7 +8,7 @@ import java.util.Scanner;
 import model.Boat;
 import model.Member;
 
-public class FileRead {
+public class FileReader {
 	private Scanner fileScan;
 	private ArrayList<Member> memberList;
 	
@@ -16,7 +16,7 @@ public class FileRead {
 	 * Construct a FIleRead object.
 	 * @param fileName The file name of the registry.
 	 */
-	public FileRead(String fileName) {
+	public FileReader(String fileName) {
 		memberList = new ArrayList<Member>();
 		try {
 			fileScan = new Scanner(new File(fileName));
