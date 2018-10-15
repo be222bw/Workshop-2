@@ -39,7 +39,7 @@ public class FileWrite {
 		member.getPersonalNum() + " " +
 		member.getNumOfBoats());
 		if (numOfBoats == 0) {
-			pw.println();
+			pw.print("\r\n");
 			pw.close();
 			return;
 		}
@@ -71,12 +71,12 @@ public class FileWrite {
 			member.getName() + "\" " +
 			member.getPersonalNum() + " " +
 			member.getNumOfBoats());
+			if (numOfBoats == 0) {
+				fileOverwriter.print("\r\n");
+				return;
+			}
 			
 			for (int n = 0; n < numOfBoats; n++) {
-				if (numOfBoats == 0) {
-					fileOverwriter.println();
-					break;
-				}
 				Boat boat = member.getBoat(n);
 				fileOverwriter.print((n == 0 ? " " : "") +"\"" +boat.getType() + "\" " + boat.getLength() +
 						(n == numOfBoats - 1 ? "\r\n" : " "));

@@ -69,6 +69,15 @@ public class Console {
 		Member member = getMemberById(idString);
 		int i = Integer.parseInt(args[2]);
 		
+		try {
+			if (i > member.getNumOfBoats() -1) {
+				throw new IndexOutOfBoundsException("No such boat index!");
+			}
+		} catch (IndexOutOfBoundsException e) {
+			System.err.println(e.getMessage());
+		}
+		Boat boat = member.getBoat(i);
+		System.out.println("Deleting " + boat.getType() + " from " + member.getName() + ".");
 		member.deleteBoat(i);
 		member.decrementNumberOfBoats();
 		
@@ -270,6 +279,7 @@ public void viewMember(String[] args) {
 		for (int i = 0; i < size; i++) {
 			Member member = memberList.get(i);
 			if (member.getIdString().equals(idString)) {
+				System.out.println("Removing member " + member.getName() + ".");
 				memberList.remove(i);
 				break;
 			}
