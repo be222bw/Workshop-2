@@ -324,7 +324,7 @@ private void printMember(Member member, boolean isVerbose) {
  	* @param idString The id string of the member to be returned.
  	* @return The member with the given id, or, if he is not found, null.
  	*/
-	public static Member getMemberById(String idString) {
+	public Member getMemberById(String idString) {
 		int size = memberList.size();
 		for (int i = 0; i < size; i++) {
 			Member member = memberList.get(i);
