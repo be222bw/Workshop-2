@@ -15,7 +15,7 @@ public class Member {
 	private PersonalNumber personalNumber;
 	private String id;
 	
-	/** Construct a Member object and assign a random id.
+	/** Constructs a Member object and assigns a random id.
 	 * @param name The full name of the member.
 	 * @param personalNumber The personal number.
 	 * @param numOfBoats The number of boats.
@@ -29,7 +29,7 @@ public class Member {
 	}
 	
 	/**
-	 * Construct a member object with the id supplied.
+	 * Constructs a member object with the id supplied.
 	 * @param name
 	 * @param personalNumber
 	 * @param id

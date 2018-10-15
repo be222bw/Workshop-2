@@ -5,7 +5,7 @@ public class Boat {
 	private double length;
 	
 	/**
-	 * Construct a Boat object.
+	 * Constructs a Boat object.
 	 * @param type The boat type.
 	 * @param length The length of the boat.
 	 */

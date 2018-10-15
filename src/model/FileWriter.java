@@ -1,4 +1,4 @@
-package controller;
+package model;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,7 +15,7 @@ public class FileWriter {
 	private PrintWriter fileOverwriter;
 
 	/**
-	 * Construct a FileWrite object.
+	 * Constructs a FileWrite object.
 	 * @param fileName The file name of the registry.
 	 */
 	public FileWriter(String fileName) {
