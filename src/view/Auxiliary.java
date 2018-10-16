@@ -23,7 +23,7 @@ public class Auxiliary {
 			}
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
-			System.exit(-2);
+			System.exit(-1);
 		}
 	}
 		

@@ -41,6 +41,7 @@ public class MemberHandler {
 			break;
 		default:
 			System.err.println("Could not identify parameter \"" + args[3] + ".\"");;
+			return;
 		}
 		fw.overwriteMemberFile(memberList);
 	}

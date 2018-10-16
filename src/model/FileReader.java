@@ -22,6 +22,7 @@ public class FileReader {
 			fileScan = new Scanner(new File(fileName));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+			System.exit(-2);
 		}
 	}
 	
