@@ -8,7 +8,7 @@ import model.Member;
 /**
  * This class contains functions used for convenience. Simply put, it contains methods that are needed in several
  * places.
- * @author Björn Elmqvist
+ * @author Björn Elmqvist, UDM17.
  *
  */
 public class Auxiliary {

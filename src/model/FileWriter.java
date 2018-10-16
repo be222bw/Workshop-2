@@ -9,6 +9,11 @@ import java.util.ArrayList;
 import model.Boat;
 import model.Member;
 
+/**
+ * Class that outputs data in the correct order.
+ * @author Björn Elmqvist, UDM17.
+ *
+ */
 public class FileWriter {
 	private File registry;
 	private PrintWriter pw;

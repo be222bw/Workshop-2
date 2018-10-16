@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 /** 
  * Personal number with validation. Most of this class is self-contained. Modified version of one of my old projects.
- * @author Björn Elmqvist
+ * @author Björn Elmqvist, UDM17.
  *
  */
 public class PersonalNumber {

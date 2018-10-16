@@ -1,5 +1,10 @@
 package model;
 
+/**
+ * Representation of a boat.
+ * @author Björn Elmqvist, UDM17.
+ *
+ */
 public class Boat {
 	private String type;
 	private double length;

@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import model.FileWriter;
 import model.Member;
 
+/**
+ * Class that handles the member-oriented commands.
+ * @author Björn Elmqvist, UDM17.
+ *
+ */
 public class MemberHandler {
 	private ArrayList<Member> memberList;
 	private FileWriter fw;

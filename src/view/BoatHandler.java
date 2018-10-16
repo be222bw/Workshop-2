@@ -6,6 +6,11 @@ import model.Boat;
 import model.FileWriter;
 import model.Member;
 
+/**
+ * Class that handles the boat-oriented commands.
+ * @author Björn Elmqvist, UDM17.
+ *
+ */
 public class BoatHandler {
 	private ArrayList<Member> memberList;
 	private FileWriter fw;

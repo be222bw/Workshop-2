@@ -5,7 +5,7 @@ import java.util.UUID;
 
 /**
  * Representation of a member.
- * @author Björn Elmqvist
+ * @author Björn Elmqvist, UDM17.
  *
  */
 public class Member {

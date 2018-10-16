@@ -8,6 +8,11 @@ import java.util.Scanner;
 import model.Boat;
 import model.Member;
 
+/**
+ * Class that reads file data in the correct order.
+ * @author Björn Elmqvist, UDM17.
+ *
+ */
 public class FileReader {
 	private Scanner fileScan;
 	private ArrayList<Member> memberList;

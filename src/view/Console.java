@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 import model.Member;
 
+/**
+ * Class that identifies the command-line argument.
+ * @author Björn Elmqvist, UDM17
+ *
+ */
 public class Console {
 	private model.FileWriter fw;
 	private model.FileReader fr;
