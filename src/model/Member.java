@@ -1,7 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 /**
  * Representation of a member.
@@ -13,29 +12,16 @@ public class Member {
 	private int numOfBoats;
 	private ArrayList<Boat> boatList;
 	private PersonalNumber personalNumber;
-	private String id;
-	
-	/** Constructs a Member object and assigns a random id.
-	 * @param name The full name of the member.
-	 * @param personalNumber The personal number.
-	 * @param numOfBoats The number of boats.
-	 */
-	public Member(String name, String personalNumber, int numOfBoats) {
-		this.name = name;
-		this.numOfBoats = numOfBoats;
-		this.id = UUID.randomUUID().toString();
-		this.personalNumber = new PersonalNumber(personalNumber);
-		this.boatList = new ArrayList<Boat>();
-	}
+	private int id;
 	
 	/**
-	 * Constructs a member object with the id supplied.
+	 * Constructs a member object.
 	 * @param name
 	 * @param personalNumber
 	 * @param id
 	 * @param numOfBoats
 	 */
-	public Member(String name, String personalNumber, String id, int numOfBoats) {
+	public Member(String name, String personalNumber, int id, int numOfBoats) {
 		this.name = name;
 		this.personalNumber = new PersonalNumber(personalNumber);
 		this.id = id;
@@ -117,11 +103,11 @@ public class Member {
 	}
 	
 	/**
-	 * Get the id in string form.
-	 * @return The id in string form.
+	 * Get the id.
+	 * @return The id.
 	 */
-	public String getIdString() {
-		return id.toString();
+	public int getId() {
+		return id;
 	}
 	
 	/**

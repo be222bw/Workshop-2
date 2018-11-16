@@ -1,7 +1,6 @@
 package view;
 
 import java.util.ArrayList;
-
 import model.Member;
 
 /**
@@ -12,9 +11,10 @@ import model.Member;
 public class Console {
 	private model.FileWriter fw;
 	private model.FileReader fr;
+	private view.Auxiliary aux;
 	private ArrayList<Member> memberList;
-	MemberHandler mh;
-	BoatHandler bh;
+	private controller.MemberHandler mh;
+	private controller.BoatHandler bh;
 	
 	/** Constructs a console object.
 	 * @param fileName The file name of the member registry.
@@ -22,9 +22,10 @@ public class Console {
 	public Console(String fileName) {
 		fw = new model.FileWriter(fileName);
 		fr = new  model.FileReader(fileName);
+		aux = new Auxiliary();
 		memberList = fr.readMembers(); // Memory for memberList is allocated in the constructor for FileRead.
-		mh = new MemberHandler(memberList, fw);
-		bh = new BoatHandler(memberList, fw);
+		mh = new controller.MemberHandler(memberList, fw, aux);
+		bh = new controller.BoatHandler(memberList, fw, aux);
 	}
 	/**
 	 * Identifies the first argument, and calls the relative method.
@@ -35,62 +36,112 @@ public class Console {
 		case "/h":
 			showHelp(args[0]);
 			break;
-		case "/cm":
+		case "/cm": {
 			if (args[args.length - 1].equals("/h")) {
 				showHelp(args[0]);
 				return;
 			}
-			mh.createMember(args);
+			aux.tooFewArguments(args.length < 3);
+			String name = args[1];
+			String personalNumber = args[2];
+			mh.createMember(name, personalNumber);
 			break;
-		case "/lm":
+		}
+		case "/lm": {
 			if (args[args.length - 1].equals("/h")) {
 				showHelp(args[0]);
 				return;
 			}
-			mh.listMembers(args);
+			aux.tooFewArguments(args.length < 2);
+			boolean isVerbose = args.length > 2 && args[1].equals("/v");
+			mh.listMembers(isVerbose);
 			break;
-		case "/vm":
+		}
+		case "/vm": {
 			if (args[args.length - 1].equals("/h")) {
 				showHelp(args[0]);
 				return;
 			}
-			mh.viewMember(args);
+			boolean isVerbose = args.length > 2 &&  args[1].equals("/v");
+			int memberId = (isVerbose ? Integer.parseInt(args[2]) : Integer.parseInt(args[1]));
+			mh.viewMember(memberId, isVerbose);
 			break;
-		case "/dm":
+		}
+		case "/dm": {
 			if (args[args.length - 1].equals("/h")) {
 				showHelp(args[0]);
 				return;
 			}
-			mh.deleteMember(args);
+			int id = Integer.parseInt(args[1]);
+			mh.deleteMember(id);
 			break;
-		case "/db":
+		}
+		case "/db": {
 			if (args[args.length - 1].equals("/h")) {
 				showHelp(args[0]);
 				return;
 			}
-			bh.deleteBoat(args);
+			aux.tooFewArguments(args.length < 3);
+			int id = Integer.parseInt(args[1]);
+			int i = Integer.parseInt(args[2]);
+			bh.deleteBoat(id, i);
 			break;
-		case "/cmi":
+		}
+		case "/cmi": {
 			if (args[args.length - 1].equals("/h")) {
 				showHelp(args[0]);
 				return;
 			}
-			mh.changeMemberInfo(args);
+			aux.tooFewArguments(args.length < 4);
+			String subCommand = args[1];
+			int id = Integer.parseInt(args[2]);
+			switch (subCommand) {
+			case "/cn":
+				String name = args[3];
+				mh.changeMemberName(id, name);
+				break;
+			case "/cpn":
+				String personalNumber = args[3];
+				mh.changeMemberPersonalNum(id, personalNumber);
+				break;
+			}
 			break;
-		case "/cbi":
+		}
+		case "/cbi": {
 			if (args[args.length - 1].equals("/h")) {
 				showHelp(args[0]);
 				return;
 			}
-			bh.changeBoatInfo(args);
+			aux.tooFewArguments(args.length < 5);
+			String subCommand = args[1];
+			int id = Integer.parseInt(args[2]);
+			int boatIndex = Integer.parseInt(args[3]);
+			switch (subCommand) {
+			case "/ct":
+				String boatType = args[2];
+				bh.changeBoatType(id, boatType, boatIndex);
+				break;
+			case "/cl":
+				double boatLength = Double.parseDouble(args[2]);
+				bh.changeBoatLength(id, boatLength, boatIndex);
+				break;
+			default:
+				System.err.println("Could not identify parameter \"" + subCommand + "\".");
+				break;
+			}	
 			break;
-		case "/rnb":
+		}
+		case "/rnb": {
 			if (args[args.length - 1].equals("/h")) {
 				showHelp(args[0]);
 				return;
 			}
-			bh.registerNewBoat(args);
+			int id = Integer.parseInt(args[1]);
+			String boatType = args[2];
+			double boatLength = Double.parseDouble(args[2]);
+			bh.registerNewBoat(id, boatType, boatLength);
 			break;
+		}
 		default:
 			System.out.println("Could not identify argument \"" + args[0] + "\"");
 			break;

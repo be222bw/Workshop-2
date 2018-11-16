@@ -35,7 +35,7 @@ public class Auxiliary {
 		public void printMember(Member member, boolean isVerbose) {
 			System.out.println("Name: " + member.getName() + "\r\n" +
 					(isVerbose ? "Personal number: " + member.getPersonalNum().toString() + "\r\n" : "") + 
-					"Id: " + member.getIdString() + "\r\nNumber of boats: " + member.getNumOfBoats());
+					"Id: " + member.getId() + "\r\nNumber of boats: " + member.getNumOfBoats());
 			if (isVerbose) {
 				for (int n= 0; n < member.getNumOfBoats(); n++) {
 					Boat boat = member.getBoat(n);
@@ -49,11 +49,11 @@ public class Auxiliary {
 	 	* @param idString The id string of the member to be returned.
 	 	* @return The member with the given id, or, if he is not found, null.
 	 	*/
-		public Member getMemberById(String idString, ArrayList<Member> memberList) {
+		public Member getMemberById(int id, ArrayList<Member> memberList) {
 			int size = memberList.size();
 			for (int i = 0; i < size; i++) {
 				Member member = memberList.get(i);
-				if (idString.equals(member.getIdString())) {
+				if (id == member.getId()) {
 					return member;
 				}
 			}

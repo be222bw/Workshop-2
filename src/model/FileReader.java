@@ -37,7 +37,7 @@ public class FileReader {
 	 */
 	public ArrayList<Member> readMembers() {
 		while (fileScan.hasNext()) {
-			String id = fileScan.next();
+			int id = fileScan.nextInt();
 			
 			fileScan.useDelimiter("\"");
 			fileScan.next();
@@ -49,9 +49,7 @@ public class FileReader {
 			String personalNumber = fileScan.next();
 			int numOfBoats = fileScan.nextInt();
 			
-			String uuid = id;
-			
-			Member member = new Member(name, personalNumber, uuid, numOfBoats);
+			Member member = new Member(name, personalNumber, id, numOfBoats);
 			
 			String type;
 			double length;
