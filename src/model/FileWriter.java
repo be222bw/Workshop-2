@@ -39,7 +39,7 @@ public class FileWriter {
 			System.exit(-2);
 		}
 		int numOfBoats = member.getNumOfBoats();
-		pw.append(member.getIdString() + " \""+
+		pw.append(member.getId() + " \""+
 		member.getName() + "\" " + 
 		member.getPersonalNum() + " " +
 		member.getNumOfBoats());
@@ -72,7 +72,7 @@ public class FileWriter {
 		for (int i = 0; i < size; i++) {
 			Member member = members.get(i);
 			int numOfBoats = member.getNumOfBoats();
-			fileOverwriter.print(member.getIdString() + " \"" +
+			fileOverwriter.print(member.getId() + " \"" +
 			member.getName() + "\" " +
 			member.getPersonalNum() + " " +
 			member.getNumOfBoats());

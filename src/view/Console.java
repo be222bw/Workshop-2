@@ -9,7 +9,6 @@ import model.Member;
  *
  */
 public class Console {
-	private model.FileWriter fw;
 	private model.FileReader fr;
 	private view.Auxiliary aux;
 	private ArrayList<Member> memberList;
@@ -20,12 +19,11 @@ public class Console {
 	 * @param fileName The file name of the member registry.
 	 */
 	public Console(String fileName) {
-		fw = new model.FileWriter(fileName);
 		fr = new  model.FileReader(fileName);
 		aux = new Auxiliary();
 		memberList = fr.readMembers(); // Memory for memberList is allocated in the constructor for FileRead.
-		mh = new controller.MemberHandler(memberList, fw, aux);
-		bh = new controller.BoatHandler(memberList, fw, aux);
+		mh = new controller.MemberHandler(memberList, aux, fileName);
+		bh = new controller.BoatHandler(memberList, aux, fileName);
 	}
 	/**
 	 * Identifies the first argument, and calls the relative method.

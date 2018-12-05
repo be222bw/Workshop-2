@@ -20,9 +20,9 @@ public class MemberHandler {
 	 * @param memberList The list to use.
 	 * @param fw The FileWriter to use.
 	 */
-	public MemberHandler(ArrayList<Member> memberList, FileWriter fw, Auxiliary aux) {
+	public MemberHandler(ArrayList<Member> memberList, Auxiliary aux, String fileName) {
 		this.memberList = memberList;
-		this.fw = fw;
+		this.fw = new FileWriter(fileName);
 		this.aux = aux;
 	}
 	

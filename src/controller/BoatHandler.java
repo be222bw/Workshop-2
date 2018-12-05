@@ -22,9 +22,9 @@ public class BoatHandler {
 	 * @param fr The file reader used.
 	 * @param fw The file writer used.
 	 */
-	public BoatHandler(ArrayList<Member> memberList, FileWriter fw, Auxiliary aux) {
+	public BoatHandler(ArrayList<Member> memberList, Auxiliary aux, String fileName) {
 		this.memberList = memberList;
-		this.fw = fw;
+		this.fw = new FileWriter(fileName);
 		this.aux = aux;
 	}
 	
