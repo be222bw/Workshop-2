@@ -12,21 +12,6 @@ import model.Member;
  *
  */
 public class Auxiliary {
-	/**
- 	* Throws an exception if there are too few arguments.
- 	* @param shallThrow Whether it shall be thrown or not.
- 	*/
-	public void tooFewArguments(boolean shallThrow) { // I throw this exception so much, I might as well automise it.
-		try {
-			if (shallThrow) {
-				throw new Exception("Too few arguments!");
-			}
-		} catch (Exception e) {
-			System.err.println(e.getMessage());
-			System.exit(-1);
-		}
-	}
-		
 		/**
 		 * Print a specific member.
 		 * @param member The member to be printed.

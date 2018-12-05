@@ -10,7 +10,6 @@ import model.Member;
  */
 public class Console {
 	private model.FileReader fr;
-	private view.Auxiliary aux;
 	private ArrayList<Member> memberList;
 	private controller.MemberHandler mh;
 	private controller.BoatHandler bh;
@@ -20,10 +19,9 @@ public class Console {
 	 */
 	public Console(String fileName) {
 		fr = new  model.FileReader(fileName);
-		aux = new Auxiliary();
 		memberList = fr.readMembers(); // Memory for memberList is allocated in the constructor for FileRead.
-		mh = new controller.MemberHandler(memberList, aux, fileName);
-		bh = new controller.BoatHandler(memberList, aux, fileName);
+		mh = new controller.MemberHandler(memberList, fileName);
+		bh = new controller.BoatHandler(memberList, fileName);
 	}
 	/**
 	 * Identifies the first argument, and calls the relative method.
@@ -39,7 +37,7 @@ public class Console {
 				showHelp(args[0]);
 				return;
 			}
-			aux.tooFewArguments(args.length < 3);
+			tooFewArguments(args.length < 3);
 			String name = args[1];
 			String personalNumber = args[2];
 			mh.createMember(name, personalNumber);
@@ -50,7 +48,7 @@ public class Console {
 				showHelp(args[0]);
 				return;
 			}
-			aux.tooFewArguments(args.length < 2);
+			tooFewArguments(args.length < 2);
 			boolean isVerbose = args.length > 2 && args[1].equals("/v");
 			mh.listMembers(isVerbose);
 			break;
@@ -79,7 +77,7 @@ public class Console {
 				showHelp(args[0]);
 				return;
 			}
-			aux.tooFewArguments(args.length < 3);
+			tooFewArguments(args.length < 3);
 			int id = Integer.parseInt(args[1]);
 			int i = Integer.parseInt(args[2]);
 			bh.deleteBoat(id, i);
@@ -90,7 +88,7 @@ public class Console {
 				showHelp(args[0]);
 				return;
 			}
-			aux.tooFewArguments(args.length < 4);
+			tooFewArguments(args.length < 4);
 			String subCommand = args[1];
 			int id = Integer.parseInt(args[2]);
 			switch (subCommand) {
@@ -110,7 +108,7 @@ public class Console {
 				showHelp(args[0]);
 				return;
 			}
-			aux.tooFewArguments(args.length < 5);
+			tooFewArguments(args.length < 5);
 			String subCommand = args[1];
 			int id = Integer.parseInt(args[2]);
 			int boatIndex = Integer.parseInt(args[3]);
@@ -191,6 +189,21 @@ public class Console {
 			break;
 		default:
 			System.out.println("Parameter not recognised!");
+		}
+	}
+	
+	/**
+ 	* Throws an exception if there are too few arguments.
+ 	* @param shallThrow Whether it shall be thrown or not.
+ 	*/
+	public void tooFewArguments(boolean shallThrow) { // I throw this exception so much, I might as well automise it.
+		try {
+			if (shallThrow) {
+				throw new Exception("Too few arguments!");
+			}
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+			System.exit(-1);
 		}
 	}
 }

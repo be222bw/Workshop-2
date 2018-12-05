@@ -20,10 +20,10 @@ public class MemberHandler {
 	 * @param memberList The list to use.
 	 * @param fw The FileWriter to use.
 	 */
-	public MemberHandler(ArrayList<Member> memberList, Auxiliary aux, String fileName) {
+	public MemberHandler(ArrayList<Member> memberList, String fileName) {
 		this.memberList = memberList;
 		this.fw = new FileWriter(fileName);
-		this.aux = aux;
+		this.aux = new Auxiliary();
 	}
 	
 	public void changeMemberPersonalNum(int id, String personalNumber) {
