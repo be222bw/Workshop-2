@@ -1,2 +1,2 @@
 @echo off
-java -cp crud.jar program %*
+java -cp crud.jar programme %*
