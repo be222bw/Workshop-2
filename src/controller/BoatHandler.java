@@ -45,13 +45,17 @@ public class BoatHandler {
 	public void changeBoatType(int memberId, String boatType, int boatIndex) {
 		Member member = aux.getMemberById(memberId, memberList);
 		Boat boat = member.getBoat(boatIndex);
+		System.out.println("Changing type of " + boat.getType() + " to " + boatType + ".");
 		boat.setType(boatType);
+		fw.overwriteMemberFile(memberList);
 	}
 	
 	public void changeBoatLength(int memberId, double boatLength, int boatIndex) {
 		Member member = aux.getMemberById(memberId, memberList);
 		Boat boat = member.getBoat(boatIndex);
+		System.out.println("Changing length of " + boat.getType() + " to " + boatLength + ".");
 		boat.setLength(boatLength);
+		fw.overwriteMemberFile(memberList);
 	}
 	
 	/**

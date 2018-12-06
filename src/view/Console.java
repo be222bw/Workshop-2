@@ -113,11 +113,11 @@ public class Console {
 			int boatIndex = Integer.parseInt(args[3]);
 			switch (subCommand) {
 			case "/ct":
-				String boatType = args[2];
+				String boatType = args[4];
 				bh.changeBoatType(id, boatType, boatIndex);
 				break;
 			case "/cl":
-				double boatLength = Double.parseDouble(args[2]);
+				double boatLength = Double.parseDouble(args[4]);
 				bh.changeBoatLength(id, boatLength, boatIndex);
 				break;
 			default:
@@ -170,7 +170,7 @@ public class Console {
 			break;
 		case "/cbi":
 			System.out.println("Change boat info. Syntax is /cbi /ct <member id> <boat index> <new type> " +
-					"or /cm /cl <member id> <boat index> <new length>.");
+					"or /cbi /cl <member id> <boat index> <new length>.");
 			break;
 		case "/rnb":
 			System.out.println("Register new boat. Syntax is /rnb <member id> <boat type> <boat length>.");
