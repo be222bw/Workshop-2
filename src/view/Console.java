@@ -48,8 +48,7 @@ public class Console {
 				showHelp(args[0]);
 				return;
 			}
-			tooFewArguments(args.length < 2);
-			boolean isVerbose = args.length > 2 && args[1].equals("/v");
+			boolean isVerbose = args.length > 1 && args[1].equals("/v");
 			mh.listMembers(isVerbose);
 			break;
 		}
@@ -134,7 +133,7 @@ public class Console {
 			}
 			int id = Integer.parseInt(args[1]);
 			String boatType = args[2];
-			double boatLength = Double.parseDouble(args[2]);
+			double boatLength = Double.parseDouble(args[3]);
 			bh.registerNewBoat(id, boatType, boatLength);
 			break;
 		}

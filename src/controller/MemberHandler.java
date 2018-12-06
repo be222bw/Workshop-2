@@ -44,6 +44,7 @@ public class MemberHandler {
 	public void listMembers(boolean isVerbose) {
 		for (Member member : memberList) {
 			aux.printMember(member, isVerbose);
+			System.out.println();
 		}
 	}
 	
@@ -53,7 +54,7 @@ public class MemberHandler {
 	 * @param personalNumber The personal number of the member to create.
 	 */
 	public void createMember(String name, String personalNumber) {
-		int id = memberList.get(memberList.size() - 1).getId() + 1; // Id is id of last member + 1.
+		int id = memberList.size() > 0 ? memberList.get(memberList.size() - 1).getId() + 1 : 0; // Id is id of last member + 1.
 		Member member = new Member(name, personalNumber, id, 0); // When creating member, start with no boats.
 		
 		fw.writeMemberData(member);
