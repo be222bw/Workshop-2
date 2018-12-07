@@ -93,11 +93,13 @@ public class Console {
 			switch (subCommand) {
 			case "/cn":
 				String name = args[3];
-				mh.changeMemberName(id, name);
+				System.out.println("Changing name to " + mh.changeMemberName(id, name));
 				break;
 			case "/cpn":
 				String personalNumber = args[3];
-				mh.changeMemberPersonalNum(id, personalNumber);
+				System.out.println("Changing personal number to " + 
+				mh.changeMemberPersonalNum(id, personalNumber) +
+				".");
 				break;
 			}
 			break;

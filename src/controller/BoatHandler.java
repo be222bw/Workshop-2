@@ -33,37 +33,55 @@ public class BoatHandler {
 	 * @param memberId The id of the member who is to register a new boat.
 	 * @param type The type of boat to register.
 	 * @param The length of the boat to register.
+	 * @return The boat registered.
 	 */
-	public void registerNewBoat(int memberId, String type, double length) {
+	public Boat registerNewBoat(int memberId, String type, double length) {
 		Member member = aux.getMemberById(memberId, memberList);
 		Boat boat = new Boat(type, length);
 		member.assignBoat(boat);
 		member.incrementNumOfBoats();
 		fw.overwriteMemberFile(memberList);
+		return boat;
 	}
 	
-	public void changeBoatType(int memberId, String boatType, int boatIndex) {
+	/** Changes the type of a boat.
+	 * @param memberId Id of the member.
+	 * @param boatType The new boat type.
+	 * @param boatIndex The index of the boat.
+	 * @return The new boat type.
+	 */
+	public String changeBoatType(int memberId, String boatType, int boatIndex) {
 		Member member = aux.getMemberById(memberId, memberList);
 		Boat boat = member.getBoat(boatIndex);
 		System.out.println("Changing type of " + boat.getType() + " to " + boatType + ".");
 		boat.setType(boatType);
 		fw.overwriteMemberFile(memberList);
+		return boatType;
 	}
 	
-	public void changeBoatLength(int memberId, double boatLength, int boatIndex) {
+	/**
+	 * Changes the length of a boat.
+	 * @param memberId Id of the member.
+	 * @param boatLength The new length.
+	 * @param boatIndex The index of the boat.
+	 * @return The new length.
+	 */
+	public double changeBoatLength(int memberId, double boatLength, int boatIndex) {
 		Member member = aux.getMemberById(memberId, memberList);
 		Boat boat = member.getBoat(boatIndex);
 		System.out.println("Changing length of " + boat.getType() + " to " + boatLength + ".");
 		boat.setLength(boatLength);
 		fw.overwriteMemberFile(memberList);
+		return boatLength;
 	}
 	
 	/**
 	 * Deletes a specific boat.
 	 * @param id The id of the member whose boat to delete.
 	 * @param i Index of the boat to delete.
+	 * @return The boat deleted.
 	 */
-	public void deleteBoat(int id, int i) {
+	public Boat deleteBoat(int id, int i) {
 		Member member = aux.getMemberById(id, memberList);
 		
 		try {
@@ -74,11 +92,10 @@ public class BoatHandler {
 			System.err.println(e.getMessage());
 		}
 		Boat boat = member.getBoat(i);
-		System.out.println("Deleting " + boat.getType() + " from " + member.getName() + ".");
 		member.deleteBoat(i);
 		member.decrementNumberOfBoats();
 		
 		fw.overwriteMemberFile(memberList);	
+		return boat;
 	}
-	
 }

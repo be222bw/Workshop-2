@@ -27,6 +27,7 @@ public class Auxiliary {
 					System.out.println("\tBoat type: " + boat.getType() + " Length: " + boat.getLength() + " metres.");
 				}
 			}
+			System.out.println();
 		}
 		
 		/**

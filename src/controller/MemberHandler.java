@@ -26,16 +26,28 @@ public class MemberHandler {
 		this.aux = new Auxiliary();
 	}
 	
-	public void changeMemberPersonalNum(int id, String personalNumber) {
+	/**
+	 * @param id The id of the member whose personal number is to be changed.
+	 * @param personalNumber The new personal number.
+	 * @return The new personal number.
+	 */
+	public String changeMemberPersonalNum(int id, String personalNumber) {
 		Member member = aux.getMemberById(id, memberList);
 		member.setPersonalNum(personalNumber);
 		fw.overwriteMemberFile(memberList);
+		return personalNumber;
 	}
 	
-	public void changeMemberName(int id, String name) {
+	/**
+	 * @param id The id of the member whose name is to be changed.
+	 * @param name The new name.
+	 * @return The new name.
+	 */
+	public String changeMemberName(int id, String name) {
 		Member member = aux.getMemberById(id, memberList);
 		member.setName(name);
 		fw.overwriteMemberFile(memberList);
+		return name;
 	}
 	/**
 	 * Lists members.
@@ -44,7 +56,6 @@ public class MemberHandler {
 	public void listMembers(boolean isVerbose) {
 		for (Member member : memberList) {
 			aux.printMember(member, isVerbose);
-			System.out.println();
 		}
 	}
 	
@@ -64,19 +75,21 @@ public class MemberHandler {
 	
 	/** Deletes a specific member.
 	 * @param id The id of the member to delete.
+	 * @return The name of the member deleted, or, if no member with the id supplied exists, null.
 	 */
-		public void deleteMember(int id) {
+		public String deleteMember(int id) {
 			int size = memberList.size();
+			String memberName = null;
 			for (int i = 0; i < size; i++) {
 				Member member = memberList.get(i);
 				if (member.getId() == id) {
-					System.out.println("Removing member " + member.getName() + ".");
+					memberName = member.getName();
 					memberList.remove(i);
 					break;
 				}
 			}
-			
 			fw.overwriteMemberFile(memberList);
+			return memberName;
 		}
 		
 		/** Views a specific member.
