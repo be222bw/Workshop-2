@@ -20,8 +20,9 @@ public class Member {
 	 * @param personalNumber
 	 * @param id
 	 * @param numOfBoats
+	 * @throws Exception 
 	 */
-	public Member(String name, String personalNumber, int id, int numOfBoats) {
+	public Member(String name, String personalNumber, int id, int numOfBoats) throws Exception {
 		this.name = name;
 		this.personalNumber = new PersonalNumber(personalNumber);
 		this.id = id;
@@ -97,8 +98,9 @@ public class Member {
 	/**
 	 * Set the personal number.
 	 * @param personalNumber The new personal number.
+	 * @throws Exception 
 	 */
-	public void setPersonalNum(String personalNumber) {
+	public void setPersonalNum(String personalNumber) throws Exception {
 		this.personalNumber = new PersonalNumber(personalNumber);
 	}
 	

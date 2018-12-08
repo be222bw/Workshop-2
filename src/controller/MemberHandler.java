@@ -1,8 +1,10 @@
 package controller;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import model.FileWriter;
 import model.Member;
+import model.PersonalNumber;
 import view.Auxiliary;
 
 /**
@@ -30,24 +32,28 @@ public class MemberHandler {
 	 * @param id The id of the member whose personal number is to be changed.
 	 * @param personalNumber The new personal number.
 	 * @return The new personal number.
+	 * @throws Exception If personal number is not correct.
 	 */
-	public String changeMemberPersonalNum(int id, String personalNumber) {
+	public String changeMemberPersonalNum(int id, String personalNumber) throws Exception {
 		Member member = aux.getMemberById(id, memberList);
+		PersonalNumber oldNum = member.getPersonalNum();
 		member.setPersonalNum(personalNumber);
 		fw.overwriteMemberFile(memberList);
-		return personalNumber;
+		return oldNum.toString();
 	}
 	
 	/**
 	 * @param id The id of the member whose name is to be changed.
 	 * @param name The new name.
-	 * @return The new name.
+	 * @return The old name.
+	 * @throws FileNotFoundException If file is not found.
 	 */
-	public String changeMemberName(int id, String name) {
+	public String changeMemberName(int id, String name) throws FileNotFoundException {
 		Member member = aux.getMemberById(id, memberList);
+		String oldName = member.getName();
 		member.setName(name);
 		fw.overwriteMemberFile(memberList);
-		return name;
+		return oldName;
 	}
 	/**
 	 * Lists members.
@@ -63,21 +69,21 @@ public class MemberHandler {
 	 * Creates a member.
 	 * @param name The name of the member to create.
 	 * @param personalNumber The personal number of the member to create.
+	 * @throws Exception If personal number is not correct.
 	 */
-	public void createMember(String name, String personalNumber) {
+	public void createMember(String name, String personalNumber) throws Exception {
 		int id = memberList.size() > 0 ? memberList.get(memberList.size() - 1).getId() + 1 : 0; // Id is id of last member + 1.
 		Member member = new Member(name, personalNumber, id, 0); // When creating member, start with no boats.
 		
 		fw.writeMemberData(member);
-		
-		aux.printMember(member, false);
 	}
 	
 	/** Deletes a specific member.
 	 * @param id The id of the member to delete.
 	 * @return The name of the member deleted, or, if no member with the id supplied exists, null.
+	 * @throws FileNotFoundException If file is not found.
 	 */
-		public String deleteMember(int id) {
+		public String deleteMember(int id) throws FileNotFoundException {
 			int size = memberList.size();
 			String memberName = null;
 			for (int i = 0; i < size; i++) {

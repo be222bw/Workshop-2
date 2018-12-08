@@ -20,22 +20,19 @@ public class FileReader {
 	/**
 	 * Construct a FIleRead object.
 	 * @param fileName The file name of the registry.
+	 * @throws FileNotFoundException If file is not found.
 	 */
-	public FileReader(String fileName) {
+	public FileReader(String fileName) throws FileNotFoundException {
 		memberList = new ArrayList<Member>();
-		try {
-			fileScan = new Scanner(new File(fileName));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			System.exit(-2);
-		}
+		fileScan = new Scanner(new File(fileName));
 	}
 	
 	/**
 	 * Read the members from file.
 	 * @return ArrayList of the members.
+	 * @throws Exception If personal number is incorrect.
 	 */
-	public ArrayList<Member> readMembers() {
+	public ArrayList<Member> readMembers() throws Exception {
 		while (fileScan.hasNext()) {
 			int id = fileScan.nextInt();
 			

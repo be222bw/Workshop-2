@@ -30,14 +30,10 @@ public class FileWriter {
 	/**
 	 * Write the member data of one member.
 	 * @param member The member whose data is to be written.
+	 * @throws FileNotFoundException 
 	 */
-	public void writeMemberData(Member member) {
-		try {
-			pw = new PrintWriter(new FileOutputStream(registry, true));
-		} catch (FileNotFoundException e) {
-			System.err.println(e.getMessage());
-			System.exit(-2);
-		}
+	public void writeMemberData(Member member) throws FileNotFoundException {
+		pw = new PrintWriter(new FileOutputStream(registry, true));
 		int numOfBoats = member.getNumOfBoats();
 		pw.append(member.getId() + " \""+
 		member.getName() + "\" " + 
@@ -60,14 +56,10 @@ public class FileWriter {
 	/**
 	 * Overwrites the entire file with a list of members.
 	 * @param members The members.
+	 * @throws FileNotFoundException 
 	 */
-	public void overwriteMemberFile(ArrayList<Member> members) {
-		try {
-			fileOverwriter = new PrintWriter(registry);
-		} catch (FileNotFoundException e) {
-			System.err.println(e.getMessage());
-			System.exit(-2);
-		}
+	public void overwriteMemberFile(ArrayList<Member> members) throws FileNotFoundException {
+		fileOverwriter = new PrintWriter(registry);
 		int size = members.size();
 		for (int i = 0; i < size; i++) {
 			Member member = members.get(i);

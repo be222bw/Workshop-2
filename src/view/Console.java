@@ -1,5 +1,6 @@
 package view;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import model.Member;
 
@@ -18,8 +19,18 @@ public class Console {
 	 * @param fileName The file name of the member registry.
 	 */
 	public Console(String fileName) {
-		fr = new  model.FileReader(fileName);
-		memberList = fr.readMembers(); // Memory for memberList is allocated in the constructor for FileRead.
+		try {
+			fr = new  model.FileReader(fileName);
+		} catch (FileNotFoundException e1) {
+			System.err.println(e1.getMessage());
+			System.exit(-2);
+		}
+		try {
+			memberList = fr.readMembers();
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+			System.exit(-1);
+		} // Memory for memberList is allocated in the constructor for FileRead.
 		mh = new controller.MemberHandler(memberList, fileName);
 		bh = new controller.BoatHandler(memberList, fileName);
 	}
@@ -40,7 +51,13 @@ public class Console {
 			tooFewArguments(args.length < 3);
 			String name = args[1];
 			String personalNumber = args[2];
-			mh.createMember(name, personalNumber);
+			try {
+				System.out.println("Creating member named " + name + " with personal number " + personalNumber + ".");
+					mh.createMember(name, personalNumber);
+			} catch (Exception e) {
+				System.err.println(e.getMessage());
+				System.exit(-1);
+			}
 			break;
 		}
 		case "/lm": {
@@ -68,7 +85,12 @@ public class Console {
 				return;
 			}
 			int id = Integer.parseInt(args[1]);
-			mh.deleteMember(id);
+			try {
+				System.out.println("Deleting member " + mh.deleteMember(id) + ".");
+			} catch (FileNotFoundException e) {
+				System.err.println(e.getMessage());
+				System.exit(-2);
+			}
 			break;
 		}
 		case "/db": {
@@ -79,7 +101,16 @@ public class Console {
 			tooFewArguments(args.length < 3);
 			int id = Integer.parseInt(args[1]);
 			int i = Integer.parseInt(args[2]);
-			bh.deleteBoat(id, i);
+			System.out.println("Deleting boat.");
+			try {
+				bh.deleteBoat(id, i);
+			} catch (IndexOutOfBoundsException e) {
+				System.err.println(e.getMessage());
+				System.exit(-3);
+			} catch (FileNotFoundException e) {
+				System.err.println(e.getMessage());
+				System.exit(-2);
+			}
 			break;
 		}
 		case "/cmi": {
@@ -93,13 +124,22 @@ public class Console {
 			switch (subCommand) {
 			case "/cn":
 				String name = args[3];
-				System.out.println("Changing name to " + mh.changeMemberName(id, name));
+				try {
+					System.out.println("Changing name from " + mh.changeMemberName(id, name) + " to " + name + ".");
+				} catch (FileNotFoundException e1) {
+					System.err.println(e1.getMessage());
+					System.exit(-2);
+				}
 				break;
 			case "/cpn":
 				String personalNumber = args[3];
-				System.out.println("Changing personal number to " + 
-				mh.changeMemberPersonalNum(id, personalNumber) +
-				".");
+				try {
+					System.out.println("Changing personal number from " +
+							mh.changeMemberPersonalNum(id, personalNumber) + " to "+ personalNumber + ".");
+				} catch (Exception e) {
+					System.err.println(e.getMessage());
+					System.exit(-1);
+				}
 				break;
 			}
 			break;
@@ -116,11 +156,23 @@ public class Console {
 			switch (subCommand) {
 			case "/ct":
 				String boatType = args[4];
-				bh.changeBoatType(id, boatType, boatIndex);
+				try {
+					System.out.println("Changing type of boat from " + bh.changeBoatType(id, boatType, boatIndex)
+					+ " to " + boatType + ".");
+				} catch (FileNotFoundException e) {
+					System.err.println(e.getMessage());
+					System.exit(-2);
+				}
 				break;
 			case "/cl":
 				double boatLength = Double.parseDouble(args[4]);
-				bh.changeBoatLength(id, boatLength, boatIndex);
+				try {
+					System.out.println("Changing length of boat from " + bh.changeBoatLength(id, boatLength, boatIndex)
+					+ " to " + boatLength + ".");
+				} catch (FileNotFoundException e) {
+					System.err.println(e.getMessage());
+					System.exit(-2);
+				}
 				break;
 			default:
 				System.err.println("Could not identify parameter \"" + subCommand + "\".");
@@ -136,7 +188,13 @@ public class Console {
 			int id = Integer.parseInt(args[1]);
 			String boatType = args[2];
 			double boatLength = Double.parseDouble(args[3]);
-			bh.registerNewBoat(id, boatType, boatLength);
+			System.out.println("Registering new boat of type " + boatType + " and length " + boatLength + ".");
+			try {
+				bh.registerNewBoat(id, boatType, boatLength);
+			} catch (FileNotFoundException e) {
+				System.err.println(e.getMessage());
+				System.exit(-2);
+			}
 			break;
 		}
 		default:
@@ -204,7 +262,7 @@ public class Console {
 			}
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
-			System.exit(-1);
+			System.exit(-4);
 		}
 	}
 }

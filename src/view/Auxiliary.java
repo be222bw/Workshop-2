@@ -18,9 +18,9 @@ public class Auxiliary {
 		 * @param isVerbose Whether to print it verbosely.
 		 */
 		public void printMember(Member member, boolean isVerbose) {
-			System.out.println("Name: " + member.getName() + "\r\n" +
-					(isVerbose ? "Personal number: " + member.getPersonalNum().toString() + "\r\n" : "") + 
-					"Id: " + member.getId() + "\r\nNumber of boats: " + member.getNumOfBoats());
+			System.out.println("Name: " + member.getName() + System.lineSeparator() +
+					(isVerbose ? "Personal number: " + member.getPersonalNum().toString() + System.lineSeparator() : "") + 
+					"Id: " + member.getId() + System.lineSeparator() + "Number of boats: " + member.getNumOfBoats());
 			if (isVerbose) {
 				for (int n= 0; n < member.getNumOfBoats(); n++) {
 					Boat boat = member.getBoat(n);

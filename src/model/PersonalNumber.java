@@ -16,15 +16,10 @@ public class PersonalNumber {
 	 * Construct a Personal Number object.
 	 * @param personalNumber The String representation of a personal number.
 	 */
-	public PersonalNumber(String personalNumber) {
+	public PersonalNumber(String personalNumber) throws Exception {
 		this.personalNumber = personalNumber;
-		try {
-			if (!isCorrect()) {
-				throw new Exception("Personal number is not living up to our expectations!");
-			}
-		} catch (Exception e) {
-			System.err.println(e.getMessage());
-			System.exit(-3);
+		if (!isCorrect()) {
+			throw new Exception("Personal number is not living up to our expectations!");
 		}
 	}
 	

@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import view.Auxiliary;
 import model.Boat;
@@ -34,8 +35,9 @@ public class BoatHandler {
 	 * @param type The type of boat to register.
 	 * @param The length of the boat to register.
 	 * @return The boat registered.
+	 * @throws FileNotFoundException If file is not found.
 	 */
-	public Boat registerNewBoat(int memberId, String type, double length) {
+	public Boat registerNewBoat(int memberId, String type, double length) throws FileNotFoundException {
 		Member member = aux.getMemberById(memberId, memberList);
 		Boat boat = new Boat(type, length);
 		member.assignBoat(boat);
@@ -48,15 +50,16 @@ public class BoatHandler {
 	 * @param memberId Id of the member.
 	 * @param boatType The new boat type.
 	 * @param boatIndex The index of the boat.
-	 * @return The new boat type.
+	 * @return The old boat type.
+	 * @throws FileNotFoundException If file is not found.
 	 */
-	public String changeBoatType(int memberId, String boatType, int boatIndex) {
+	public String changeBoatType(int memberId, String boatType, int boatIndex) throws FileNotFoundException {
 		Member member = aux.getMemberById(memberId, memberList);
 		Boat boat = member.getBoat(boatIndex);
-		System.out.println("Changing type of " + boat.getType() + " to " + boatType + ".");
+		String oldType = boat.getType();
 		boat.setType(boatType);
 		fw.overwriteMemberFile(memberList);
-		return boatType;
+		return oldType;
 	}
 	
 	/**
@@ -64,38 +67,34 @@ public class BoatHandler {
 	 * @param memberId Id of the member.
 	 * @param boatLength The new length.
 	 * @param boatIndex The index of the boat.
-	 * @return The new length.
+	 * @return The old length.
+	 * @throws FileNotFoundException If file is not found.
 	 */
-	public double changeBoatLength(int memberId, double boatLength, int boatIndex) {
+	public double changeBoatLength(int memberId, double boatLength, int boatIndex) throws FileNotFoundException {
 		Member member = aux.getMemberById(memberId, memberList);
 		Boat boat = member.getBoat(boatIndex);
-		System.out.println("Changing length of " + boat.getType() + " to " + boatLength + ".");
+		double oldLength = boat.getLength();
 		boat.setLength(boatLength);
 		fw.overwriteMemberFile(memberList);
-		return boatLength;
+		return oldLength;
 	}
-	
 	/**
 	 * Deletes a specific boat.
 	 * @param id The id of the member whose boat to delete.
 	 * @param i Index of the boat to delete.
 	 * @return The boat deleted.
+	 * @throws FileNotFoundException If file is not found.
+	 * @throws IndecOutOfBoundsException
 	 */
-	public Boat deleteBoat(int id, int i) {
+	public void deleteBoat(int id, int i) throws IndexOutOfBoundsException, FileNotFoundException {
 		Member member = aux.getMemberById(id, memberList);
 		
-		try {
-			if (i > member.getNumOfBoats() -1) {
-				throw new IndexOutOfBoundsException("No such boat index!");
-			}
-		} catch (IndexOutOfBoundsException e) {
-			System.err.println(e.getMessage());
+		if (i > member.getNumOfBoats() -1) {
+			throw new IndexOutOfBoundsException("No such boat index!");
 		}
-		Boat boat = member.getBoat(i);
 		member.deleteBoat(i);
 		member.decrementNumberOfBoats();
 		
 		fw.overwriteMemberFile(memberList);	
-		return boat;
 	}
 }
